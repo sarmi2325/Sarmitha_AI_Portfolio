@@ -6,7 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <!-- External dependencies -->
-
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='apple-touch-icon.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicon-32x32.png') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicon-16x16.png') }}">
+  <link rel="manifest" href="{{ url_for('static', filename='site.webmanifest') }}">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
@@ -56,19 +59,19 @@
   
     <!-- Quick Buttons -->
     <div class="quick-buttons">
-      <a href="{{ url_for('home') }}" class="home-btn">
+      <a href="{{ url_for('home') }}" class="home-btn" title="Home">
         <i class="fa fa-home"></i>
       </a>
-      <button onclick="quick('tell me about you')">
+      <button onclick="quick('tell me about you')" title="About">
         <i class="fas fa-user"></i> 
       </button>
-      <button onclick="quick('What projects have you done?')">
+      <button onclick="quick('What projects have you done?')" title="Projects">
         <i class="fas fa-code"></i> 
       </button>
-      <button onclick="quick('What are your technical skills?')">
+      <button onclick="quick('What are your technical skills?')" title="Skills">
         <i class="fas fa-toolbox"></i> 
       </button>
-      <button onclick="quick('How can I contact you?')">
+      <button onclick="quick('How can I contact you?')" title="Contact">
         <i class="fas fa-envelope"></i> 
       </button>
 
@@ -773,3 +776,4 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   </script>
   
+
