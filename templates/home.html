@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <!-- Hire Me Button -->
+<a href="mailto:sarmi8822@gmail.com?subject=Hiring%20Inquiry&body=Hello%20Sarmitha,%0D%0AI%20am%20interested%20in%20working%20with%20you." 
+class="top-button" id="hireMeBtn">
+Hire Me
+</a>
+
+  <div id="intro">
+    <div class="typewriter-container">
+      <div id="typewriter" class="typewriter-text"></div>
+    </div>
+    
+    <img
+    id="sarmi-image"
+    src="{{ url_for('static', filename='avatar-1.png') }}"
+    style="width: 400px; height: 400px; margin-top: -80px;"
+    alt="Avatar"
+  />
+  
+  </div>
+{% endblock %}

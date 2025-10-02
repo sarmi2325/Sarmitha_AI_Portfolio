@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sarmitha | AI Chat Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- External dependencies -->
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<!-- Main Layout -->
+<div class="main-area">
+  
+  <!-- Dynamic Content Block -->
+  {% block content %}
+  {% endblock %}
+
+  <!-- Chatbox -->
+  <div id="chatbox" class="chat-container">
+    <div id="chat"></div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="bottom-ui-container">
+  <!-- Input Area -->
+  <div class="input-area-top">
+    <!-- Context Coverage Indicator -->
+    <div class="context-coverage-container">
+      <div class="context-coverage-circle" id="contextCoverage">
+        <div class="coverage-text">0%</div>
+      </div>
+      <div class="coverage-label">Context</div>
+    </div>
+    
+    <div class="input-wrapper">
+      <input id="input" placeholder="Ask Sarmi..." />
+      <button class="send-btn" onclick="send()">➤</button>
+    </div>
+    
+    <!-- Refresh Button (Admin Only) -->
+    <div class="refresh-container" id="refreshContainer" style="display: none;">
+      <button class="refresh-btn" id="refreshBtn" onclick="refreshResume()" title="Update resume from Notion">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+      <div class="refresh-label">Update</div>
+    </div>
+  </div>
+  
+    <!-- Quick Buttons -->
+    <div class="quick-buttons">
+      <a href="{{ url_for('home') }}" class="home-btn">
+        <i class="fa fa-home"></i>
+      </a>
+      <button onclick="quick('tell me about you')">
+        <i class="fas fa-user"></i> 
+      </button>
+      <button onclick="quick('What projects have you done?')">
+        <i class="fas fa-code"></i> 
+      </button>
+      <button onclick="quick('What are your technical skills?')">
+        <i class="fas fa-toolbox"></i> 
+      </button>
+      <button onclick="quick('How can I contact you?')">
+        <i class="fas fa-envelope"></i> 
+      </button>
+
+    </div>
+  </div>
+  
+<!-- Modal Structure -->
+<div class="modal" id="modal-portfolio">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-portfolio')">&times;</span>
+    <h2>AI Portfolio Project Features</h2>
+
+    <ul>
+      <li><strong>Hybrid RAG Search:</strong> Semantic embeddings with FAISS and BM25 fallback</li>
+      <li><strong>OpenAI GPT-4o Integration:</strong> Primary LLM with quota handling</li>
+      <li><strong>Smart Context Management:</strong> Maintains 5-message history with multilingual support</li>
+      <li><strong>Dynamic Updates:</strong> Notion content sync with real-time embedding and index refresh</li>
+      <li><strong>Robust Tech Stack:</strong> Flask backend, Python AI libraries, responsive frontend</li>
+      <li><strong>Security & Performance:</strong> Admin authentication, error handling, scalable design</li>
+      <li><strong>Deployment Ready:</strong> Cross-platform and production-ready architecture</li>
+    </ul>
+
+    <h2>Tech Stack</h2>
+    <ul>
+      <li>Backend: Flask, OpenAI GPT-4o, FAISS, BM25Okapi, Python</li>
+      <li>Data: Notion API, JSON, SQLite</li>
+      <li>Frontend: HTML5, CSS3, JavaScript, Font Awesome</li>
+      <li>AI Libraries: NumPy, scikit-learn, deep-translator, rank-bm25</li>
+      <li>Dev & Deployment: Git, Python subprocess, environment variables</li>
+      <li>APIs: OpenAI, Notion, RESTful endpoints</li>
+    </ul>
+    <h3>Links</h3>
+    <div class="modal-links">
+      <a href="https://github.com/sarmi2325/TalentSynth_Resumer_matcher" target="_blank" class="modal-btn">GitHub</a>
+      <a href="https://talentsynthresumermatcher-production.up.railway.app/" target="_blank" class="modal-btn">Demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-talentsynth">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-talentsynth')">&times;</span>
+    <h2>TalentSynth-Resume Analyzer</h2>
+    <p>Developed an AI-powered resume parser using LlamaParse and Google Gemini 2.5 Flash to extract and semantically analyze candidate data against job descriptions.</p>
+
+    <h3>Key Features</h3>
+    <ul>
+      <li><strong>Resume Parsing:</strong> Advanced document parsing supporting PDFs and DOCX, extracting text and metadata with semantic understanding via Gemini AI.</li>
+      <li><strong>Experience & Skill Detection:</strong> Automated calculation of candidate experience and identification of technical and soft skills using AI-powered semantic analysis.</li>
+      <li><strong>AI-Powered Job Matching:</strong> Matches resumes to job descriptions with scoring, strengths and weaknesses analysis, and actionable recommendations.</li>
+      <li><strong>Secure User Management:</strong> Google OAuth login/signup with Django Allauth, supporting user profiles and real-time analysis results.</li>
+      <li><strong>Scalable Full-Stack App:</strong> Built with Django and Gunicorn, deployed on Railway with real-time updates and analytics dashboard.</li>
+    </ul>
+
+    <h3>Tech Stack</h3>
+    <p>Django, Gunicorn, llama-parse, llama-index, SQLite</p>
+
+    <h3>Links</h3>
+    <div class="modal-links">
+      <a href="https://github.com/sarmi2325/TalentSynth_Resumer_matcher" target="_blank" class="modal-btn">GitHub</a>
+      <a href="https://talentsynthresumermatcher-production.up.railway.app/" target="_blank" class="modal-btn">Demo</a>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="modal-pneumonia">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-pneumonia')">&times;</span>
+    <h2>Pneumonia Detection using AI</h2>
+    <p>Developed an ensemble deep learning system combining Simple CNN, MobileNetV2, and EfficientNetB0 to classify chest X-ray images into NORMAL and PNEUMONIA. Deployed as a Streamlit web application with Grad-CAM visualizations for model explainability.</p>
+    <h3>Training Strategy</h3>
+    <ul>
+      <li><strong>Simple CNN:</strong> Achieved ~94.2% accuracy with AUC ~0.9848 after tuning.</li>
+      <li><strong>MobileNetV2:</strong> Reached ~95.2% accuracy, AUC ~0.9925 with transfer learning.</li>
+      <li><strong>EfficientNetB0:</strong> Achieved 94.7% accuracy, AUC ~0.9874 using two-phase training.</li>
+      <li><strong>Ensemble:</strong> Weighted averaging of predictions improved confidence.</li>
+    </ul>
+    <h3>Model Performance</h3>
+    <ul>
+      <li><strong>Accuracy:</strong> 96%</li>
+      <li><strong>AUC:</strong> 0.9941</li>
+      <li><strong>Precision:</strong> NORMAL 96%, PNEUMONIA 96%</li>
+      <li><strong>Recall:</strong> NORMAL 95%, PNEUMONIA 97%</li>
+      <li><strong>F1 Score:</strong> NORMAL 95.5%, PNEUMONIA 96.5%</li>
+    </ul>
+    <h3>Tech Stack</h3>
+    <p>Python, TensorFlow/Keras, Streamlit, OpenCV, Grad-CAM, NumPy</p>
+    <h3>Links</h3>
+    <div class="modal-links">
+      <a href="https://github.com/sarmi2325/Pneumonia_detection" target="_blank" class="modal-btn">GitHub</a> 
+      <a href="https://pneumoniadetection-er8mvnqy9s9ejsr2g6wqjk.streamlit.app/" target="_blank" class="modal-btn">Demo</a>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal" id="modal-linear">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal('modal-linear')">&times;</span>
+    <h2>Linear Algebra Visual Toolkit</h2>
+    <p>Built a web-based toolkit using Python and Streamlit to visualize and solve linear algebra problems. Designed to help users bridge theoretical concepts with practical applications.</p>
+
+    <h3>Key Features</h3>
+    <ul>
+      <li>Gaussian Elimination solver with step-by-step visualization</li>
+      <li>2D/3D matrix transformation visualizer</li>
+      <li>PCA implementation from scratch using eigen decomposition</li>
+      <li>Real-time educational tool for exploring concepts interactively</li>
+    </ul>
+
+    <h3>Tech Stack</h3>
+    <p>Python, Streamlit, NumPy, Plotly, Matplotlib</p>
+
+    <h3>Links</h3>
+    <div class="modal-links">
+      <a href="https://github.com/sarmi2325/Linear-Algebra-Visual-Toolkit" target="_blank" class="modal-btn">GitHub</a> 
+      <a href="https://linear-algebra-visual-toolkit-pnrigscsyfkeaxxrkfhvgv.streamlit.app/" target="_blank" class="modal-btn">Demo</a>
+    </div>
+  </div>
+</div>
+
+  <script>
+   
+    const modalMap = {
+      "AI Portfolio": "modal-portfolio",
+      "TalentSynth-Resume Analyzer": "modal-talentsynth",
+      "Pneumonia Detection": "modal-pneumonia",
+      "Linear Algebra Visual Toolkit": "modal-linear"
+    };
+  
+
+    // Typewriter intro
+    window.addEventListener('DOMContentLoaded', () => {
+    const lines = [
+      `Hi, I'm <span style="color:#3b82f6;font-weight:600;">Sarmitha</span>`,
+      `Wanna read my Resume?`,
+      `Talk to it!`
+    ];
+
+    const el = document.getElementById('typewriter');
+
+    const typeLine = (html, delay = 50) => {
+      return new Promise(resolve => {
+        // Create a temporary div to extract plain text for typing
+        const temp = document.createElement('div');
+        temp.innerHTML = html;
+        const plain = temp.textContent;
+
+        let i = 0;
+        el.innerHTML = ''; // keep element, just clear content
+
+        const typing = setInterval(() => {
+          el.textContent = plain.substring(0, i + 1);
+          i++;
+          if (i === plain.length) {
+            clearInterval(typing);
+            el.innerHTML = html; // insert styled version after typing
+            resolve();
+          }
+        }, delay);
+      });
+    };
+
+    const loopTyping = async () => {
+      while (true) {
+        for (let line of lines) {
+          await typeLine(line);
+          await new Promise(res => setTimeout(res, 2000));
+        }
+      }
+    };
+
+    loopTyping();
+    const input = document.getElementById('input');
+  input.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault(); 
+      send();
+    }
+  });
+  });
+  
+  function hideIntro() {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("chatbox").style.display = "flex";
+  const hireBtn = document.getElementById("hireMeBtn");
+  if (hireBtn) hireBtn.style.display = "none";
+ 
+}
+
+    function appendChatBubble(sender, msg) {
+      const chat = document.getElementById("chat");
+      const bubble = document.createElement("div");
+      bubble.className = "chat-bubble";
+      bubble.innerHTML = `<strong>${sender}:</strong> ${msg}`;
+      chat.appendChild(bubble);
+      chat.scrollTop = chat.scrollHeight;
+    }
+  
+ 
+    function typewriterEffect(element, text, delay = 20, callback) {
+      element.innerHTML = "";
+      let i = 0;
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, delay);
+        } else if (callback) {
+          callback();
+        }
+      }
+      type();
+    }
+  
+    function clearChat() {
+      const chat = document.getElementById("chat");
+      chat.innerHTML = "";
+    }
+  
+    function send() {
+      const input = document.getElementById("input");
+      const message = input.value.trim();
+      if (!message) return;
+  
+      hideIntro();
+      clearChat();
+      appendChatBubble("You", message);
+  
+      // Show typing indicator
+      const chat = document.getElementById("chat");
+      const bubble = document.createElement("div");
+      bubble.className = "chat-bubble";
+      bubble.innerHTML = `
+   <div class="typing-indicator-text">
+  <span>Sarmi is typing...</span>
+</div>
+
+`;
+      chat.appendChild(bubble);
+      chat.scrollTop = chat.scrollHeight;
+  
+      // Send POST request to Flask backend
+      fetch('/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        bubble.innerHTML = marked.parse(data.response);
+        
+        // Update context coverage indicator
+        if (data.context_coverage !== undefined) {
+          updateContextCoverage(data.context_coverage);
+        }
+      })
+      .catch(() => {
+        bubble.innerHTML = "❌ Error contacting server";
+      });
+  
+      input.value = '';
+    }
+  
+function quick(msg) {
+  hideIntro();
+  clearChat();
+  appendChatBubble("You", msg);
+  const key = msg.toLowerCase().trim();
+
+  if (key === "what projects have you done?") {
+  const chat = document.getElementById("chat");
+
+  // 1. Show static project cards
+  const bubble = document.createElement("div");
+  bubble.className = "chat-bubble";
+  bubble.innerHTML = `
+  <div class="projects-scroll-row bw-theme">
+      <div class="project-card-bw" onclick="openModal('modal-portfolio')">
+        <div class="project-card-icon-bw">
+          <img src="https://img.icons8.com/?size=100&id=3dan8A9YrGfa&format=png&color=000000" alt="AI Portfolio" />
+        </div>
+        <div class="project-card-content-bw">
+          <h4>AI Portfolio</h4>
+          <p>AI for Portfolio</p>
+        </div>
+      </div>
+      <div class="project-card-bw" onclick="openModal('modal-talentsynth')">
+        <div class="project-card-icon-bw">
+          <img src="https://img.icons8.com/?size=100&id=bskQEfQJvdO4&format=png&color=000000" alt="TalentSynth" />
+        </div>
+        <div class="project-card-content-bw">
+          <h4>TalentSynth Resume Analyzer</h4>
+          <p>AI for Career</p>
+        </div>
+      </div>
+      <div class="project-card-bw" onclick="openModal('modal-pneumonia')">
+        <div class="project-card-icon-bw">
+          <img src="https://img.icons8.com/?size=100&id=nqZ1gKG3lOzH&format=png&color=000000" alt="Pneumonia Detection" />
+        </div>
+        <div class="project-card-content-bw">
+          <h4>Pneumonia Detection</h4>
+          <p>AI for Healthcare</p>
+        </div>
+      </div>
+      
+      <div class="project-card-bw" onclick="openModal('modal-linear')">
+        <div class="project-card-icon-bw">
+          <img src="https://img.icons8.com/?size=100&id=fO1ly4q0lgd5&format=png&color=000000" alt="LA Visual Toolkit" />
+        </div>
+        <div class="project-card-content-bw">
+          <h4>LA Visual Toolkit</h4>
+          <p>Interactive Math & ML</p>
+        </div>
+      </div>
+    </div>
+  `;
+  chat.appendChild(bubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 2. Show typing indicator bubble immediately
+  const typingBubble = document.createElement("div");
+  typingBubble.className = "chat-bubble";
+  typingBubble.id = "typing-indicator-bubble";
+  typingBubble.innerHTML = `
+   <div class="typing-indicator-text">
+  <span>Sarmi is typing...</span>
+</div>
+
+`;
+  chat.appendChild(typingBubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 3. Fetch API, then replace typing indicator with response
+  fetch('/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: "summarize 3 projects and ask follow-up" })
+  })
+  .then(res => res.json())
+  .then(data => {
+    typingBubble.innerHTML =  marked.parse(data.response);
+  })
+  .catch(() => {
+    typingBubble.innerHTML = "Sorry, I couldn't fetch more info right now.";
+  });
+}
+  // ... handle other keys as before ...
+  else if (key === "what are your technical skills?") {
+  const chat = document.getElementById("chat");
+
+  // 1. Show static skills data
+  const bubble = document.createElement("div");
+  bubble.className = "chat-bubble";
+  bubble.innerHTML = `
+<div class="skills-section">
+  <div class="skills-category">
+    <h4>Programming Language:</h4>
+    <div class="skills-list">
+      <span class="skill-btn">Python </span>
+      <span class="skill-btn">HTML</span>
+      <span class="skill-btn">CSS</span>
+      <span class="skill-btn">JS</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <h4>ML Libraries & Tools:</h4>
+    <div class="skills-list">
+      <span class="skill-btn">NumPy</span>
+      <span class="skill-btn">Pandas</span>
+      <span class="skill-btn">Scikit-learn</span>
+      <span class="skill-btn">Keras</span>
+      <span class="skill-btn">SHAP</span>
+      <span class="skill-btn">SMOTE</span>
+      <span class="skill-btn">Grad-CAM</span>
+      <span class="skill-btn">MCP</span>
+      <span class="skill-btn">llama Index</span>
+      <span class="skill-btn">Playwright</span>
+      <span class="skill-btn">OpenWebUI</span>
+      <span class="skill-btn">Ollama</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <h4>Deployment & Frameworks:</h4>
+    <div class="skills-list">
+      <span class="skill-btn">Django</span>
+      <span class="skill-btn">Flask</span>
+      <span class="skill-btn">Streamlit</span>
+      <span class="skill-btn">Docker</span>
+      <span class="skill-btn">Render</span>
+      <span class="skill-btn">Railway</span>
+      <span class="skill-btn">Git</span>
+      <span class="skill-btn">Google Colab</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <h4>Soft Skills:</h4>
+    <div class="skills-list">
+      <span class="skill-btn">Continuous Learning</span>
+      <span class="skill-btn">Communication</span>
+      <span class="skill-btn">Creativity</span>
+      <span class="skill-btn">Focus</span>
+    </div>
+  </div>
+</div>
+
+
+  `;
+  chat.appendChild(bubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 2. Show typing indicator bubble immediately
+  const typingBubble = document.createElement("div");
+  typingBubble.className = "chat-bubble";
+  typingBubble.id = "typing-indicator-bubble";
+  typingBubble.innerHTML = `
+  <div class="typing-indicator-text">
+  <span>Sarmi is typing...</span>
+</div>
+
+`;
+  chat.appendChild(typingBubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 3. Fetch API, then replace typing indicator with response
+  fetch('/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: "summarize skills in three lines and ask follow-up" })
+  })
+  .then(res => res.json())
+  .then(data => {
+    typingBubble.innerHTML = marked.parse(data.response);
+  })
+  .catch(() => {
+    typingBubble.innerHTML = "Sorry, I couldn't fetch more info right now.";
+  });
+}
+else if (key === "how can i contact you?") {
+  const chat = document.getElementById("chat");
+
+  // 1. Show static contact cards
+  const bubble = document.createElement("div");
+  bubble.className = "chat-bubble";
+  bubble.innerHTML = `
+<div class="contact-icons">
+  <a href="mailto:sarmi8822@gmail.com" target="_blank">
+    <img src="https://img.icons8.com/color/48/000000/gmail-new.png" alt="Gmail">
+  </a>
+  <a href="https://linkedin.com/in/sarmithas" target="_blank">
+    <img src="https://img.icons8.com/color/48/000000/linkedin.png" alt="LinkedIn">
+  </a>
+  <a href="https://github.com/sarmi2325" target="_blank">
+    <img src="https://img.icons8.com/ios-filled/48/000000/github.png" alt="GitHub">
+  </a>
+  <!-- Resume Download Icon -->
+  <a href="{{ url_for('static', filename='resume.pdf') }}" download target="_blank">
+    <img src="https://img.icons8.com/ios/50/000000/resume.png" alt="Resume">
+
+  </a>
+</div>
+
+
+  `;
+  chat.appendChild(bubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 2. Show typing indicator bubble immediately
+  const typingBubble = document.createElement("div");
+  typingBubble.className = "chat-bubble";
+  typingBubble.id = "typing-indicator-bubble";
+  typingBubble.innerHTML = `
+    <div class="typing-indicator-text">
+  <span>Sarmi is typing...</span>
+</div>
+
+`;
+  chat.appendChild(typingBubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 3. Fetch API, then replace typing indicator with response
+  fetch('/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: "in a warm tone say about collaboration and working together in 2 lines in general.speak as a first person" })
+  })
+  .then(res => res.json())
+  .then(data => {
+    typingBubble.innerHTML =  marked.parse(data.response);
+  })
+  .catch(() => {
+    typingBubble.innerHTML = "Sorry, I couldn't fetch more info right now.";
+  });
+}
+else if (key === "tell me about you") { 
+  const chat = document.getElementById("chat");
+
+  // 1. Create and append the bubble with static profile info
+  const bubble = document.createElement("div");
+  bubble.className = "chat-bubble";
+  bubble.innerHTML = `
+    <div class="profile-header">
+      <div class="profile-photo">
+        <img src="/static/s.jpeg" alt="Sarmitha" width="200" height="300" loading="lazy">
+      </div>
+      <div class="profile-intro">
+        <h1>Sarmitha</h1>
+        <div class="profile-meta">
+          <span>Machine Learning Engineer</span> 
+        
+    </div>
+  `;
+  chat.appendChild(bubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 2. Create and append the typing indicator bubble
+  const typingBubble = document.createElement("div");
+  typingBubble.className = "chat-bubble";
+  typingBubble.id = "typing-indicator-bubble";
+  typingBubble.innerHTML = `
+     <div class="typing-indicator-text">
+  <span>Sarmi is typing...</span>
+</div>
+
+`;
+  chat.appendChild(typingBubble);
+  chat.scrollTop = chat.scrollHeight;
+
+  // 3. API call to get additional response
+  fetch('/chat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ message: "Introduce yourself as sarmitha, tell 2 small 2 line paragraph about her and ask for follow up" })
+  })
+  .then(res => res.json())
+  .then(data => {
+    typingBubble.innerHTML =  marked.parse(data.response);
+  })
+  .catch(() => {
+    typingBubble.innerHTML = "❌ Error fetching more info.";
+  });
+}
+    }
+
+  
+    function openModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.style.display = "block";
+        checkAndShowHireMe(); 
+      } else {
+        console.error("Modal not found for id:", id);
+      }
+    }
+  
+    function closeModal(id) {
+      const modal = document.getElementById(id);
+      if (modal) {
+        modal.style.display = "none";
+      }
+    }
+  
+    function checkAndShowHireMe() {
+  const hireBtn = document.getElementById("hireMeBtn");
+  const intro = document.getElementById("intro");
+
+  if (!hireBtn || !intro) return;
+
+  // Show "Hire Me" button only if intro section is visible
+  if (intro.style.display !== "none") {
+    hireBtn.style.display = "inline-block";
+  } else {
+    hireBtn.style.display = "none";
+  }
+}
+
+// Home Button Functionality
+document.addEventListener('DOMContentLoaded', () => {
+  const homeBtn = document.getElementById("homeBtn");
+  const hireBtn = document.getElementById("hireMeBtn"); 
+  const intro = document.getElementById("intro");
+
+  if (homeBtn) {
+    homeBtn.addEventListener("click", () => {
+      if (intro) intro.style.display = "block";
+      const chatbox = document.getElementById("chatbox");
+      const watermark = document.getElementById("watermark");
+
+      if (chatbox) chatbox.style.display = "none";
+      if (watermark) watermark.style.display = "block";
+
+      setTimeout(() => {
+        checkAndShowHireMe(); 
+      }, 100);
+
+      document.querySelectorAll('.modal').forEach(modal => {
+        modal.style.display = "none";
+      });
+
+      clearChat();
+    });
+  }
+});
+
+  // Context Coverage Indicator Functions
+  function updateContextCoverage(coverage) {
+    const circle = document.getElementById('contextCoverage');
+    const text = circle.querySelector('.coverage-text');
+    const percentage = Math.round(coverage * 100);
+    
+    // Update text
+    text.textContent = percentage + '%';
+    
+    // Update circle progress (using CSS custom property)
+    circle.style.setProperty('--progress', coverage);
+    
+    // Add visual feedback based on coverage level
+    circle.className = 'context-coverage-circle';
+    if (coverage >= 0.8) {
+      circle.classList.add('high-coverage');
+    } else if (coverage >= 0.5) {
+      circle.classList.add('medium-coverage');
+    } else {
+      circle.classList.add('low-coverage');
+    }
+  }
+
+  // Initialize context coverage
+  updateContextCoverage(0);
+
+  // Admin authentication
+  function checkAdminAccess() {
+    const password = prompt("Enter admin password to access update controls:");
+    if (password === "sarmi2024") { // Change this to your desired password
+      document.getElementById('refreshContainer').style.display = 'flex';
+      return true;
+    } else if (password !== null) {
+      alert("Access denied. This feature is only available to the portfolio owner.");
+    }
+    return false;
+  }
+
+  // Show admin button on 5 taps of context circle
+  let clickCount = 0;
+  document.getElementById('contextCoverage').addEventListener('click', function() {
+    clickCount++;
+    if (clickCount === 5) {
+      checkAdminAccess();
+      clickCount = 0;
+    }
+    setTimeout(() => { clickCount = 0; }, 2000);
+  });
+
+  // Refresh Resume Function
+  function refreshResume() {
+    // Check if user is still authenticated
+    if (document.getElementById('refreshContainer').style.display === 'none') {
+      alert("Please authenticate first by tapping the context circle 5 times.");
+      return;
+    }
+
+    const refreshBtn = document.getElementById('refreshBtn');
+    const icon = refreshBtn.querySelector('i');
+    
+    // Show loading state
+    refreshBtn.disabled = true;
+    icon.classList.add('fa-spin');
+    refreshBtn.title = 'Updating resume...';
+    
+    // Send request to update resume
+    fetch('/update-resume', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    })
+    .then(res => res.json())
+    .then(data => {
+      // Show success state
+      icon.classList.remove('fa-spin');
+      icon.classList.add('fa-check');
+      refreshBtn.title = 'Resume updated successfully!';
+      
+      // Reset after 2 seconds
+      setTimeout(() => {
+        icon.classList.remove('fa-check');
+        refreshBtn.disabled = false;
+        refreshBtn.title = 'Update resume from Notion';
+      }, 2000);
+    })
+    .catch(error => {
+      // Show error state
+      icon.classList.remove('fa-spin');
+      icon.classList.add('fa-exclamation-triangle');
+      refreshBtn.title = 'Update failed. Try again.';
+      
+      // Reset after 3 seconds
+      setTimeout(() => {
+        icon.classList.remove('fa-exclamation-triangle');
+        refreshBtn.disabled = false;
+        refreshBtn.title = 'Update resume from Notion';
+      }, 3000);
+    });
+  }
+  </script>
+  

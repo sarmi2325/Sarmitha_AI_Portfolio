@@ -1,0 +1,69 @@
+{
+  "Profile": {
+    "_content": "Passionate AI/ML Engineer with expertise in deep learning, computer vision, and end-to-end ML deployment. Currently pursuing B.E in Electronics and Instrumentation Engineering with a 9.12/10 CGPA. Proven track record of building production-ready AI applications with 96% accuracy in medical imaging and innovative RAG-based systems."
+  },
+  "Education": {
+    "B.E Electronics and Instrumentation Engineering": {
+      "_content": "Sri Ramakrishna Engineering College  | 2021 – 2025 | Coimbatore, India Specialization: Sensor Technology | CGPA: 9.12/10"
+    },
+    "HSC": {
+      "_content": "Vimal Jyothi Convent Matric Higher Sec School  | 2021 | Coimbatore, India Grade: 91.5%"
+    }
+  },
+  "Technical Skills": {
+    "Programming Language": {
+      "_content": "Python, MYSQL, HTML, CSS, JS"
+    },
+    "ML Libraries & Tools": {
+      "_content": "NumPy, Pandas, Scikit-learn, Keras, SHAP, SMOTE, Grad-CAM, MCP, llama Index, Playwright, OpenwebUI, Ollama"
+    },
+    "Deployment & Frameworks": {
+      "_content": "Django, Flask, Streamlit, Docker, Render, Railway, Git, Google Colab"
+    }
+  },
+  "Projects": {
+    "Interactive Linear Algebra Toolkit": {
+      "_content": "Tech Stack:  Python, Streamlit, NumPy, Plotly, Matplotlib • Developed a web-based toolkit using Python and Streamlit to visualize linear algebra concepts. • Implemented Gaussian elimination, Gauss-Jordan elimination, 2D/3D matrix transformations, and PCA using eigen decomposition and SVD. • Designed interactive interfaces to bridge theory with practical understanding. • Challenges : Overcoming the challenge of visualizing complex 2D/3D matrix operations interactively while keeping the interface intuitive and responsive."
+    },
+    "AI for Pneumonia Detection using Deep Learning": {
+      "_content": "Tech Stack:  TensorFlow, Keras, EfficientNetB0, MobileNetV2, Grad-CAM, Streamlit • Developed and deployed a deep learning app to classify chest X-rays as Pneumonia or Normal in real time. • Trained MobileNetV2 and EfficientNetB0 with data augmentation, early stopping, and ResNet50-based knowledge distillation. • Integrated Grad-CAM for visual explanation of predictions, enhancing interpretability in medical imaging. • Achieved 96% accuracy and 0.995 AUC using a dynamic confidence-weighted ensemble. • Challenges : Handling class imbalance, training multiple models efficiently, and integrating Grad-CAM for real-time interpretability in medical imaging."
+    },
+    "Retrieval-Augmented Resume Chatbot": {
+      "_content": "Tech Stack:   Python, Flask, Gunicorn, GPT-4o, rank_bm25, deep-translator • Developed a hybrid RAG system integrating OpenAI embeddings with FAISS for semantic search and BM25 as an automatic fallback, ensuring reliable retrieval even during GPT API quota limits. • Implemented real-time resume synchronization using Notion integration with hash-based change detection, enabling automatic update of embeddings and search indices with zero downtime. • Designed a context-aware conversational interface supporting multilingual input, 5-message history tracking with visual context feedback, and strict response guardrails to maintain accuracy within resume scope."
+    },
+    "TalentSynth-Resume Analyzer": {
+      "_content": "Tech Stack:   Django, Gunicorn, llama-parse, llama-index, SQLite • Developed an AI-powered resume parser using LlamaParse and Google Gemini 2.5 Flash to extract and semantically analyze candidate data against job descriptions. • Created a strict rubric-based evaluation system scoring technical, soft skills, experience, and education for precise candidate-job matching. • Delivered a secure, scalable Django full-stack app on Railway with Google OAuth authentication and a real-time analytics dashboard for career insights."
+    }
+  },
+  "Internship": {
+    "Gravity AI, AI/ML Intern": {
+      "_content": "July 2025-Sept 2025 | Coimbatore, Tamilnadu, India • Implemented AI/ML projects: car damage identifier, RAG-based repair guidance, and OpenWebUI chat with LLM-driven MySQL queries. • Worked with Docker, MCP, and Playwright to automate and orchestrate AI/ML workflows. • Learned prompting, context engineering, model pricing trade-offs, and semantic tool-calling techniques."
+    },
+    "Open Source Engineering Cooperation, Intern": {
+      "_content": "June 2023 | Bengaluru, India • Gained hands-on understanding of C programming fundamentals for embedded systems. • Explored the working principles of sensors and microcontrollers in real-world applications. • Studied PIC microcontrollers in detail, including their architecture and use cases."
+    }
+  },
+  "Publications": {
+    "ICAISS-2023 (Scopus Indexed) – IEEE": {
+      "_content": "Affiliation:  Care College of Engineering, Trichy Paper:  Monitoring of Prosthetic Leg During Rehabilitation Using IoT Summary:  Real-time tracking of prosthetic and normal leg movements using IoT sensors via ThingSpeak to monitor rehabilitation progress."
+    },
+    "ICCES-2024 – IEEE": {
+      "_content": "Affiliation:  PPG Institute of Technology Paper:  Determining the Toxicity of Water After Oil Spill Using UAV Summary:  Assessment of water toxicity after oil spills using UAV-mounted sensors for real-time monitoring and data visualization to guide remediation efforts."
+    }
+  },
+  "Achievements": {
+    "_content": "• Sri. P. Ramasamy Naidu Memorial Award  – Sri Ramakrishna Engineering College: Awarded for achieving the highest CGPA (9.12/10) across the department (2021–2023). • Served as a jury member for Hackspora2k25 at Karpagam Academy of Higher Education, representing Gravity AI and evaluating innovative AI/ML projects."
+  },
+  "Hackathons": {
+    "_content": "• Top 50 Finalist – Thryve Digital National Healthcare Hackathon • Participated in Annual Innovation Expo – MVJ College of Engineering, Bangalore • Built predictive model in Humidity Prediction Challenge – MachineHack"
+  },
+  "Certificates": {
+    "_content": "• Linear Algebra for Machine Learning and Data Science  – Coursera • Artificial Intelligence Primer Certification  – Infosys Springboard | Score: 82.5 • OpenAI Generative Pre-trained Transformer 3 (GPT-3) for developers  - Infosys Springboard • Launching into Machine Learning  - Google Cloud • Introduction to AI and Machine Learning on Google Cloud  - Google Cloud • Numpy  - Great Learning • Industrial IoT & Industry 4.0  – NPTEL (Silver Certificate, Merit Holder) • HackerRank Verified Skill Certifications  – Basic: Python, SQL • BEC Preliminary English Exam  – Cambridge | Score: 152/170"
+  },
+  "Languages": {
+    "_content": "• Tamil (Native) • English (Professional fluency)"
+  },
+  "Interests": {
+    "_content": "• Visual Arts:  Passionate about sketching and painting since childhood, enhancing creativity and visual problem-solving. • Dance:  Practiced for several years, fostering discipline, rhythm, and stage confidence."
+  }
+}

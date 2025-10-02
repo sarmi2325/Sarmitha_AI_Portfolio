@@ -1,0 +1,31 @@
+# Byte-compiled python files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment directories
+.env
+.venv
+env/
+venv/
+
+# Django static and media files
+staticfiles/
+media/
+
+# Database files
+db.sqlite3
+
+# Pyenv
+.python-version
+
+# Editors/IDEs
+.vscode/
+.idea/
+*.swp
+
+# macOS system files
+.DS_Store
+
+# Logs
+*.log
