@@ -2,7 +2,7 @@
 ## Live Demo
 
 Check out the live AI Portfolio application here:  
-[AI Portfolio Website](https://aiportfoliowebsite-production.up.railway.app/)
+[AI Portfolio Website](https://sarmithaaiportfolio-production.up.railway.app/)
 
 ![AI Portfolio Screenshot](https://github.com/sarmi2325/AI_Portfolio_Website/raw/main/Screenshot/Screenshot.png)
 An advanced AI-powered portfolio system featuring hybrid Retrieval-Augmented Generation (RAG) for resume analysis and conversational interaction.
