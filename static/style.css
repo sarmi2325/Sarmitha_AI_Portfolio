@@ -168,7 +168,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 5px;
-    margin-bottom:-20px;
+    margin-bottom:-1px;
   }
 
   .context-coverage-circle {
