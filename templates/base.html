@@ -759,7 +759,7 @@ document.addEventListener('DOMContentLoaded', () => {
             logItem.innerHTML = `
               <div class="qa-timestamp">${log.timestamp}</div>
               <div class="qa-question"><strong>Q:</strong> ${log.question}</div>
-              <div class="qa-answer"><strong>A:</strong> ${log.answer.substring(0, 100)}${log.answer.length > 100 ? '...' : ''}</div>
+              <div class="qa-answer"><strong>A:</strong> ${log.answer}</div>
             `;
             qaLogsList.appendChild(logItem);
           });
