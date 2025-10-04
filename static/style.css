@@ -928,3 +928,144 @@ html, body {
     transition: 0.3s;
   }
   
+  /* === ADMIN STATS STYLES === */
+  .stats-btn {
+    background: #4CAF50;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .stats-btn:hover {
+    background: #45a049;
+    transform: scale(1.1);
+  }
+
+  .stats-label {
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    margin-top: 2px;
+    margin-left: 10px;
+  }
+
+  .admin-stats-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .admin-stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+
+  .admin-stats-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+  }
+
+  .close-stats-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-stats-btn:hover {
+    color: #333;
+  }
+
+  .admin-stats-content {
+    font-size: 14px;
+  }
+
+  .visitor-count {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+  }
+
+  .qa-logs {
+    margin-top: 20px;
+  }
+
+  .qa-logs-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  .qa-log-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 3px solid #28a745;
+  }
+
+  .qa-log-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .qa-timestamp {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 5px;
+  }
+
+  .qa-question {
+    margin-bottom: 5px;
+    color: #333;
+  }
+
+  .qa-answer {
+    color: #555;
+    font-size: 13px;
+  }
+
+  .no-logs, .error {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-style: italic;
+  }
+
+  .error {
+    color: #dc3545;
+  }
+  
