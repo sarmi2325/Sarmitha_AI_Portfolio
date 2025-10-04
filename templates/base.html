@@ -40,7 +40,7 @@
       <div class="context-coverage-circle" id="contextCoverage">
         <div class="coverage-text">0%</div>
       </div>
-      <div class="coverage-label"></div>
+      
     </div>
     
     <div class="input-wrapper">
@@ -54,6 +54,28 @@
         <i class="fas fa-sync-alt"></i>
       </button>
       <div class="refresh-label">Update</div>
+      
+      <button class="stats-btn" id="statsBtn" onclick="showAdminStats()" title="View site analytics">
+        <i class="fas fa-chart-bar"></i>
+      </button>
+      <div class="stats-label">Analytics</div>
+    </div>
+    
+    <!-- Admin Stats Container -->
+    <div class="admin-stats-container" id="adminStatsContainer" style="display: none;">
+      <div class="admin-stats-header">
+        <h3>📊 Site Analytics</h3>
+        <button class="close-stats-btn" onclick="hideAdminStats()">×</button>
+      </div>
+      <div class="admin-stats-content">
+        <div class="visitor-count">
+          <strong>Total Visitors:</strong> <span id="visitorCount">0</span>
+        </div>
+        <div class="qa-logs">
+          <strong>Recent Q&A Logs:</strong>
+          <div id="qaLogsList" class="qa-logs-list"></div>
+        </div>
+      </div>
     </div>
   </div>
   
@@ -105,8 +127,8 @@
     </ul>
     <h3>Links</h3>
     <div class="modal-links">
-      <a href="https://github.com/sarmi2325/Sarmitha_AI_Portfolio" target="_blank" class="modal-btn">GitHub</a>
-      <a href="https://sarmithaaiportfolio-production.up.railway.app/" target="_blank" class="modal-btn">Demo</a>
+      <a href="https://github.com/sarmi2325/AI_Portfolio_Website" target="_blank" class="modal-btn">GitHub</a>
+      <a href="https://aiportfoliowebsite-production.up.railway.app/" target="_blank" class="modal-btn">Demo</a>
     </div>
   </div>
 </div>
@@ -714,6 +736,47 @@ document.addEventListener('DOMContentLoaded', () => {
     return false;
   }
 
+  // Show admin stats
+  function showAdminStats() {
+    const statsContainer = document.getElementById('adminStatsContainer');
+    statsContainer.style.display = 'block';
+    
+    // Fetch admin data
+    fetch('/admin-data')
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('visitorCount').textContent = data.visitor_count;
+        
+        const qaLogsList = document.getElementById('qaLogsList');
+        qaLogsList.innerHTML = '';
+        
+        if (data.qa_logs.length === 0) {
+          qaLogsList.innerHTML = '<div class="no-logs">No Q&A logs yet</div>';
+        } else {
+          data.qa_logs.forEach(log => {
+            const logItem = document.createElement('div');
+            logItem.className = 'qa-log-item';
+            logItem.innerHTML = `
+              <div class="qa-timestamp">${log.timestamp}</div>
+              <div class="qa-question"><strong>Q:</strong> ${log.question}</div>
+              <div class="qa-answer"><strong>A:</strong> ${log.answer.substring(0, 100)}${log.answer.length > 100 ? '...' : ''}</div>
+            `;
+            qaLogsList.appendChild(logItem);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching admin data:', error);
+        document.getElementById('visitorCount').textContent = 'Error';
+        document.getElementById('qaLogsList').innerHTML = '<div class="error">Error loading data</div>';
+      });
+  }
+
+  // Hide admin stats
+  function hideAdminStats() {
+    document.getElementById('adminStatsContainer').style.display = 'none';
+  }
+
   // Show admin button on 5 taps of context circle
   let clickCount = 0;
   document.getElementById('contextCoverage').addEventListener('click', function() {
@@ -776,4 +839,5 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   </script>
   
+
 
