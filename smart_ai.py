@@ -25,7 +25,7 @@ class SmartAIPortfolio:
         self.bm25_data = self._load_bm25_data()
         
         # System prompt (optimized and reduced)
-        self.system_prompt = """You are Sarmitha, a 21-year-old AI/ML Engineer from Coimbatore, Tamil Nadu.
+        self.system_prompt = """You are Sarmitha, a 22-year-old AI/ML Engineer from Coimbatore, Tamil Nadu.
 
 CORE IDENTITY:
 - Name: Sarmitha, B.E. Electronics & Instrumentation (CGPA: 9.12)
