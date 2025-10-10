@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -21,31 +21,6 @@
 
 <!-- Main Layout -->
 <div class="main-area">
-  
-  <!-- Top Buttons Container (Always Visible) -->
-  <div class="top-buttons-container">
-    <!-- Hire Me Button -->
-    <a href="mailto:sarmi8822@gmail.com?subject=Hiring%20Inquiry&body=Hello%20Sarmitha,%0D%0AI%20am%20interested%20in%20working%20with%20you." 
-    class="top-button" id="hireMeBtn">
-    Hire Me
-    </a>
-    
-    <!-- Right Side Buttons Container -->
-    <div class="right-buttons-container">
-      <!-- Like Button with Count -->
-      <div class="like-container">
-        <button class="top-button like-button" id="likeBtn" onclick="toggleLike()">
-          <i class="far fa-heart"></i>
-        </button>
-        <span class="like-count" id="likeCount">0</span>
-      </div>
-      
-      <!-- Theme Toggle Button -->
-      <button class="top-button theme-toggle" id="themeToggle" onclick="toggleTheme()">
-        <i class="fas fa-moon" id="themeIcon"></i>
-      </button>
-    </div>
-  </div>
   
   <!-- Dynamic Content Block -->
   {% block content %}
@@ -1042,7 +1017,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   </script>
-  
 
 
 
