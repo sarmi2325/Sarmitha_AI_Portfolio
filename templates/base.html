@@ -297,6 +297,15 @@
     function toggleTheme() {
       const body = document.body;
       const themeIcon = document.getElementById('themeIcon');
+      const themeToggle = document.getElementById('themeToggle');
+      
+      // Force remove hover state by temporarily disabling pointer events
+      if (themeToggle) {
+        themeToggle.style.pointerEvents = 'none';
+        setTimeout(() => {
+          themeToggle.style.pointerEvents = 'auto';
+        }, 50);
+      }
       
       if (body.getAttribute('data-theme') === 'dark') {
         body.removeAttribute('data-theme');
@@ -398,9 +407,12 @@
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) themeToggle.style.display = "none";
   
-  // Hide Like button
+  // Hide Like button and count
   const likeBtn = document.getElementById("likeBtn");
   if (likeBtn) likeBtn.style.display = "none";
+  
+  const likeCount = document.getElementById("likeCount");
+  if (likeCount) likeCount.style.display = "none";
 }
 
   function showIntro() {
@@ -415,9 +427,12 @@
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) themeToggle.style.display = "block";
   
-  // Show Like button
+  // Show Like button and count
   const likeBtn = document.getElementById("likeBtn");
   if (likeBtn) likeBtn.style.display = "block";
+  
+  const likeCount = document.getElementById("likeCount");
+  if (likeCount) likeCount.style.display = "block";
 }
 
     function appendChatBubble(sender, msg) {
@@ -1044,5 +1059,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   </script>
   
+
 
 
