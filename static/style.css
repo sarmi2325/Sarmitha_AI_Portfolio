@@ -573,9 +573,9 @@ html, body {
   }
 
   .theme-toggle:hover {
-    background: #f39c12;
-    border-color: #f39c12;
-    color: #fff;
+    background: #f39c12 !important;
+    border-color: #f39c12 !important;
+    color: #fff !important;
   }
   
   .profile-header {
@@ -1000,6 +1000,13 @@ html, body {
     
     /* Ensure theme toggle works properly in responsive */
     .theme-toggle:hover {
+      background: #f39c12 !important;
+      border-color: #f39c12 !important;
+      color: #fff !important;
+    }
+    
+    /* Dark theme hover for theme toggle in responsive */
+    [data-theme="dark"] .theme-toggle:hover {
       background: #f39c12 !important;
       border-color: #f39c12 !important;
       color: #fff !important;
@@ -1449,4 +1456,4 @@ html, body {
   .error {
     color: #dc3545;
   }
-  
+ 
