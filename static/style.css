@@ -112,6 +112,29 @@
   color: #fff !important;
 }
 
+/* Dark theme responsive button fixes */
+[data-theme="dark"] .top-button {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] .top-button:hover {
+  background: var(--hover-bg) !important;
+  color: var(--hover-text) !important;
+}
+
+[data-theme="dark"] #hireMeBtn {
+  background: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+  border-color: var(--border-color) !important;
+}
+
+[data-theme="dark"] #hireMeBtn:hover {
+  background: var(--hover-bg) !important;
+  color: var(--hover-text) !important;
+}
+
 /* Dark theme for project cards */
 [data-theme="dark"] .project-card-bw {
   background: #2d2d2d !important;
@@ -489,7 +512,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: 18px; /* Moved like button down */
+    margin-top: 24px; /* Moved like button down */
   }
 
   .like-count {
@@ -954,7 +977,7 @@ html, body {
     
     .like-container {
       gap: 1px;
-      margin-top: 14px; /* Moved like button up in responsive */
+      margin-top: 12px; /* Moved like button a little lower in responsive */
     }
     
     .like-count {
@@ -976,6 +999,30 @@ html, body {
       background: #f39c12 !important;
       border-color: #f39c12 !important;
       color: #fff !important;
+    }
+    
+    /* Fix button color issues in responsive - prevent black/white override */
+    .top-button {
+      background: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border-color) !important;
+    }
+    
+    .top-button:hover {
+      background: var(--hover-bg) !important;
+      color: var(--hover-text) !important;
+    }
+    
+    /* Specific fixes for hire button */
+    #hireMeBtn {
+      background: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border-color) !important;
+    }
+    
+    #hireMeBtn:hover {
+      background: var(--hover-bg) !important;
+      color: var(--hover-text) !important;
     }
     .chat-container {
       max-height: 85vh;
@@ -1382,4 +1429,4 @@ html, body {
   .error {
     color: #dc3545;
   }
- 
+  
