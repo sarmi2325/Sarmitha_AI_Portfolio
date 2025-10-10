@@ -954,7 +954,7 @@ html, body {
     
     .like-container {
       gap: 1px;
-      margin-top: 8px; /* Moved like button up in responsive */
+      margin-top: 12px; /* Moved like button up in responsive */
     }
     
     .like-count {
