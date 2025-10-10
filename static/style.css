@@ -489,7 +489,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: 24px; /* Moved like button down */
+    margin-top: 18px; /* Moved like button down */
   }
 
   .like-count {
@@ -954,7 +954,7 @@ html, body {
     
     .like-container {
       gap: 1px;
-      margin-top: 12px; /* Moved like button up in responsive */
+      margin-top: 14px; /* Moved like button up in responsive */
     }
     
     .like-count {
