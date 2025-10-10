@@ -93,6 +93,25 @@
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.5) !important;
 }
 
+/* Dark theme for like button states */
+[data-theme="dark"] .like-button.liked {
+  background: #ff4757 !important;
+  border-color: #ff4757 !important;
+  color: #fff !important;
+}
+
+[data-theme="dark"] .like-button.liked:hover {
+  background: #ff3742 !important;
+  border-color: #ff3742 !important;
+}
+
+/* Dark theme for theme toggle */
+[data-theme="dark"] .theme-toggle:hover {
+  background: #f39c12 !important;
+  border-color: #f39c12 !important;
+  color: #fff !important;
+}
+
 /* Dark theme for project cards */
 [data-theme="dark"] .project-card-bw {
   background: #2d2d2d !important;
@@ -456,11 +475,13 @@ html, body {
     gap: 10px;
     /* Removed background, backdrop-filter, border-radius, padding, box-shadow, border */
   }
-
+  
+  /* Ensure like button stays in same position when hire button is hidden */
   .right-buttons-container {
     display: flex;
     align-items: center;
     gap: 4px;
+    margin-left: auto; /* Always push to the right side */
   }
 
   .like-container {
@@ -468,7 +489,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: 17px; /* Moved like button down */
+    margin-top: 24px; /* Moved like button down */
   }
 
   .like-count {
@@ -511,14 +532,14 @@ html, body {
   }
 
   .like-button.liked {
-    background: #ff4757;
-    border-color: #ff4757;
-    color: #fff;
+    background: #ff4757 !important;
+    border-color: #ff4757 !important;
+    color: #fff !important;
   }
 
   .like-button.liked:hover {
-    background: #ff3742;
-    border-color: #ff3742;
+    background: #ff3742 !important;
+    border-color: #ff3742 !important;
   }
 
   /* Theme Toggle Specific Styles */
@@ -933,7 +954,7 @@ html, body {
     
     .like-container {
       gap: 1px;
-      margin-top: 20px; /* Moved like button down in responsive */
+      margin-top: 8px; /* Moved like button up in responsive */
     }
     
     .like-count {
@@ -948,6 +969,13 @@ html, body {
     .like-button, .theme-toggle {
       padding: 8px 10px;
       min-width: 40px;
+    }
+    
+    /* Ensure theme toggle works properly in responsive */
+    .theme-toggle:hover {
+      background: #f39c12 !important;
+      border-color: #f39c12 !important;
+      color: #fff !important;
     }
     .chat-container {
       max-height: 85vh;
@@ -1354,4 +1382,4 @@ html, body {
   .error {
     color: #dc3545;
   }
-  
+ 
