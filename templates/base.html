@@ -65,7 +65,10 @@
     <div class="admin-stats-container" id="adminStatsContainer" style="display: none;">
       <div class="admin-stats-header">
         <h3>📊 Site Analytics</h3>
-        <button class="close-stats-btn" onclick="hideAdminStats()">×</button>
+        <div class="admin-header-buttons">
+          <button class="logout-btn" onclick="logoutAdmin()" title="Logout Admin">🚪</button>
+          <button class="close-stats-btn" onclick="hideAdminStats()">×</button>
+        </div>
       </div>
       <div class="admin-stats-content">
         <div class="visitor-count">
@@ -867,7 +870,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Verify admin session
   function verifyAdminSession() {
     const sessionToken = localStorage.getItem('admin_session_token');
-    if (!sessionToken) return false;
+    if (!sessionToken) {
+      // No session token - hide admin buttons
+      document.getElementById('refreshContainer').style.display = 'none';
+      return false;
+    }
     
     fetch('/admin-verify', {
       method: 'POST',
@@ -931,6 +938,24 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('adminStatsContainer').style.display = 'none';
   }
 
+  // Logout admin (clear session)
+  function logoutAdmin() {
+    localStorage.removeItem('admin_session_token');
+    document.getElementById('refreshContainer').style.display = 'none';
+    document.getElementById('adminStatsContainer').style.display = 'none';
+    alert('Admin session ended. Buttons hidden for security.');
+  }
+
+  // Initialize admin state on page load
+  document.addEventListener('DOMContentLoaded', function() {
+    // Hide admin buttons by default
+    document.getElementById('refreshContainer').style.display = 'none';
+    document.getElementById('adminStatsContainer').style.display = 'none';
+    
+    // Check if there's a valid admin session
+    verifyAdminSession();
+  });
+
   // Show admin button on 5 taps of context circle
   let clickCount = 0;
   document.getElementById('contextCoverage').addEventListener('click', function() {
@@ -992,6 +1017,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   </script>
-  
+   
 
 
