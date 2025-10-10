@@ -81,15 +81,6 @@
   border-color: #ffffff !important;
 }
 
-/* Dark theme for top buttons container */
-[data-theme="dark"] .top-buttons-container {
-  background: rgba(45, 45, 45, 0.95) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
-              0 4px 16px rgba(0, 0, 0, 0.3),
-              0 2px 8px rgba(0, 0, 0, 0.2) !important;
-  border: 1px solid rgba(255, 255, 255, 0.1) !important;
-}
-
 /* Dark theme for logout button */
 [data-theme="dark"] .logout-btn {
   background: #dc3545 !important;
@@ -463,14 +454,7 @@ html, body {
     align-items: center;
     z-index: 1000; /* Higher z-index to ensure it stays on top */
     gap: 10px;
-    background: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
-    backdrop-filter: blur(15px); /* Enhanced blur effect */
-    border-radius: 15px;
-    padding: 12px 18px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 
-                0 4px 16px rgba(0, 0, 0, 0.1),
-                0 2px 8px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    /* Removed background, backdrop-filter, border-radius, padding, box-shadow, border */
   }
 
   .right-buttons-container {
