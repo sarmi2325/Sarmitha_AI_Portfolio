@@ -72,7 +72,7 @@
       </div>
       <div class="admin-stats-content">
         <div class="visitor-count">
-          <strong>Total Visitors:</strong> <span id="visitorCount">0</span>
+          <strong>Unique Visitors:</strong> <span id="visitorCount">0</span>
         </div>
         <div class="qa-logs">
           <strong>Recent Q&A Logs:</strong>
@@ -398,7 +398,9 @@
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) themeToggle.style.display = "none";
   
-  // Keep Like button visible (no changes needed)
+  // Hide Like button
+  const likeBtn = document.getElementById("likeBtn");
+  if (likeBtn) likeBtn.style.display = "none";
 }
 
   function showIntro() {
@@ -413,7 +415,9 @@
   const themeToggle = document.getElementById("themeToggle");
   if (themeToggle) themeToggle.style.display = "block";
   
-  // Keep Like button visible (no changes needed)
+  // Show Like button
+  const likeBtn = document.getElementById("likeBtn");
+  if (likeBtn) likeBtn.style.display = "block";
 }
 
     function appendChatBubble(sender, msg) {
@@ -1039,6 +1043,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
   </script>
-
+  
 
 
