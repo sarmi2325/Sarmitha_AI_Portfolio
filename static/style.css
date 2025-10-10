@@ -1,3 +1,120 @@
+:root {
+  --bg-primary: #fff;
+  --bg-secondary: #f2f3f5;
+  --text-primary: #18191a;
+  --text-secondary: #555;
+  --border-color: #18191a;
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-bg: #18191a;
+  --hover-text: #fff;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #cccccc;
+  --border-color: #ffffff;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+  --hover-bg: #ffffff;
+  --hover-text: #1a1a1a;
+}
+
+/* Dark theme specific overrides */
+[data-theme="dark"] .typewriter-text {
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+[data-theme="dark"] .chat-bubble {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .profile-intro h1 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .profile-meta {
+  color: #cccccc !important;
+}
+
+[data-theme="dark"] .skills-category h4 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .skill-btn {
+  color: #ffffff !important;
+  background: #2d2d2d !important;
+  border-color: #555 !important;
+}
+
+[data-theme="dark"] .skill-btn:hover {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+[data-theme="dark"] .modal-content {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+[data-theme="dark"] .modal-content h2,
+[data-theme="dark"] .modal-content h3 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .modal-content p,
+[data-theme="dark"] .modal-content li {
+  color: #cccccc !important;
+}
+
+[data-theme="dark"] .modal-btn {
+  background: #ffffff !important;
+  color: #1a1a1a !important;
+}
+
+[data-theme="dark"] .modal-btn:hover {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
+/* Dark theme for project cards */
+[data-theme="dark"] .project-card-bw {
+  background: #2d2d2d !important;
+  border-color: #ffffff !important;
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .project-card-bw:hover {
+  background: #3d3d3d !important;
+  transform: scale(1.03);
+}
+
+[data-theme="dark"] .project-card-icon-bw {
+  background: #1a1a1a !important;
+}
+
+[data-theme="dark"] .project-card-content-bw h4 {
+  color: #ffffff !important;
+}
+
+[data-theme="dark"] .project-card-content-bw p {
+  color: #cccccc !important;
+}
+
+/* Dark theme for profile card */
+[data-theme="dark"] .profile-header {
+  background: #2d2d2d !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+}
+
+[data-theme="dark"] .profile-photo img {
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1) !important;
+}
+
 /* === BASE SETUP === */
 html, body {
     margin: 0;
@@ -12,11 +129,10 @@ html, body {
   body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: #fff;
-    color: #18191a;
-    
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
-    
   }
   
   .main-area {
@@ -44,15 +160,16 @@ html, body {
   .typewriter-text {
     font-size: 36px;
     font-weight: 600;
-    border-right: 2px solid #18191a;
+    border-right: 2px solid var(--text-primary);
     white-space: nowrap;
     overflow: hidden;
-    color: #18191a;
+    color: var(--text-primary);
     animation: blink 0.75s step-end infinite;
     margin-bottom: 20px;
+    transition: color 0.3s ease, border-color 0.3s ease;
   }
   @keyframes blink {
-    0%, 100% { border-color: #18191a; }
+    0%, 100% { border-color: var(--text-primary); }
     50% { border-color: transparent; }
   }
   
@@ -69,16 +186,17 @@ html, body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #fff;
+    background: var(--bg-primary);
     z-index: 150;
-    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.04); /* soft top shadow (optional) */
+    box-shadow: 0 -1px 5px var(--shadow-color);
+    transition: background-color 0.3s ease;
   }
   /* === CHAT CONTAINER === */
   .chat-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    background: #ffffff;
+    background: var(--bg-primary);
     border-radius: 16px;
     padding: 20px;
     width: 100%;
@@ -86,7 +204,7 @@ html, body {
     height: calc(100vh - 180px);
     overflow-y: auto;
     margin: 0 auto; 
-    
+    transition: background-color 0.3s ease;
     z-index: 1;
     box-sizing: border-box;
     padding-bottom: 200px;
@@ -94,13 +212,14 @@ html, body {
   }
   
   .chat-bubble {
-    background: #ffff;
+    background: var(--bg-primary);
     padding: 12px 16px;
     border-radius: 12px;
     margin-bottom: 12px;
-    color: #18191a;
+    color: var(--text-primary);
     font-size: 15px;
     line-height: 1.6;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
   
   /* === BOTTOM UI CONTAINER (Wraps Input + Quick Buttons) === */
@@ -108,9 +227,10 @@ html, body {
     position: fixed;
     bottom: 0;
     width: 100%;
-    background: #fff;
+    background: var(--bg-primary);
     z-index: 999; /* Higher than everything else */
-    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.04); /* Optional soft shadow */
+    box-shadow: 0 -1px 5px var(--shadow-color);
+    transition: background-color 0.3s ease;
   }
   
   /* === INPUT AREA === */
@@ -120,7 +240,8 @@ html, body {
     align-items: center;
     gap: 15px;
     padding: 10px 20px 0 20px; /* no bottom padding */
-    background: #fff;
+    background: var(--bg-primary);
+    transition: background-color 0.3s ease;
   }
   
   .input-wrapper {
@@ -136,30 +257,31 @@ html, body {
     font-size: 16px;
     border-radius: 12px;
     border: 1.5px solid #bbb;
-    background: #fff;
-    color: #18191a;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
   }
   
   #input:focus {
     outline: none;
-    border-color: #18191a;
+    border-color: var(--border-color);
   }
   
   .send-btn {
     padding: 14px 20px;
-    background: #18191a;
-    color: #fff;
+    background: var(--hover-bg);
+    color: var(--hover-text);
     border: none;
     border-radius: 12px;
     font-weight: 600;
     cursor: pointer;
-    transition: background 0.18s, color 0.18s;
+    transition: all 0.3s ease;
   }
   
   .send-btn:hover {
-    background: #fff;
-    color: #18191a;
-    border: 1.5px solid #18191a;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 1.5px solid var(--border-color);
   }
 
   /* === CONTEXT COVERAGE INDICATOR === */
@@ -269,15 +391,16 @@ html, body {
     flex-wrap: wrap;
     gap: 10px;
     padding: 10px 20px;
-    background: #fff;
+    background: var(--bg-primary);
+    transition: background-color 0.3s ease;
   }
   
   .quick-buttons button,
   .quick-buttons .home-btn {
     padding: 10px 16px;
     font-size: 14px;
-    background: #f2f3f5;
-    color: #18191a;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -285,13 +408,13 @@ html, body {
     text-decoration: none;
     display: flex;
     align-items: center;
-    transition: background 0.18s, color 0.18s;
+    transition: all 0.3s ease;
   }
   
   .quick-buttons button:hover,
   .quick-buttons .home-btn:hover {
-    background: #18191a;
-    color: #fff;
+    background: var(--hover-bg);
+    color: var(--hover-text);
   }
   
   
@@ -306,23 +429,93 @@ html, body {
     0%, 100% { opacity: 0.3; }
     50% { opacity: 1; }
   }
-  .top-button {
+  /* === TOP BUTTONS CONTAINER === */
+  .top-buttons-container {
     position: fixed;
     top: 20px;
     left: 20px;
-    background: #fff;
-    border: 2px solid #18191a;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+    gap: 10px;
+  }
+
+  .right-buttons-container {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .like-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    margin-top: 16px;
+  }
+
+  .like-count {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+    min-width: 20px;
+    text-align: center;
+  }
+
+  .top-button {
+    background: var(--bg-primary);
+    border: 2px solid var(--border-color);
     border-radius: 12px;
     padding: 10px 18px;
     font-weight: 600;
     cursor: pointer;
-    z-index: 100;
-    color: #18191a;
+    color: var(--text-primary);
     text-decoration: none;
-    transition: background 0.18s, color 0.18s;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
   }
+  
   .top-button:hover {
-    background: #18191a;
+    background: var(--hover-bg);
+    color: var(--hover-text);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-color);
+  }
+
+  /* Like Button Specific Styles */
+  .like-button {
+    padding: 10px 12px;
+    min-width: 45px;
+    justify-content: center;
+  }
+
+  .like-button.liked {
+    background: #ff4757;
+    border-color: #ff4757;
+    color: #fff;
+  }
+
+  .like-button.liked:hover {
+    background: #ff3742;
+    border-color: #ff3742;
+  }
+
+  /* Theme Toggle Specific Styles */
+  .theme-toggle {
+    padding: 10px 12px;
+    min-width: 45px;
+    justify-content: center;
+  }
+
+  .theme-toggle:hover {
+    background: #f39c12;
+    border-color: #f39c12;
     color: #fff;
   }
   
@@ -702,11 +895,34 @@ html, body {
       font-size: 13px;
       
     }
-    #hireMeBtn {
+    .top-buttons-container {
       top: 10px;
       left: 10px;
-      padding: 8px 14px;
-      font-size: 14px;
+      right: 10px;
+      gap: 8px;
+    }
+    
+    .right-buttons-container {
+      gap: 3px;
+    }
+    
+    .like-container {
+      gap: 1px;
+      margin-top: 6px;
+    }
+    
+    .like-count {
+      font-size: 8px;
+    }
+    
+    .top-button {
+      padding: 8px 12px;
+      font-size: 12px;
+    }
+    
+    .like-button, .theme-toggle {
+      padding: 8px 10px;
+      min-width: 40px;
     }
     .chat-container {
       max-height: 85vh;
@@ -927,8 +1143,8 @@ html, body {
     filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.3));
     transition: 0.3s;
   }
-  
-   /* === ADMIN STATS STYLES === */
+
+  /* === ADMIN STATS STYLES === */
   .stats-btn {
     background: #4CAF50;
     border: none;
