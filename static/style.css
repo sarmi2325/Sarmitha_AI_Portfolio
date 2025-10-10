@@ -979,7 +979,7 @@ html, body {
     
     .like-container {
       gap: 1px;
-      margin-top: 12px; /* Moved like button a little lower in responsive */
+      margin-top: 14px; /* Moved like button a little lower in responsive */
     }
     
     .like-count {
