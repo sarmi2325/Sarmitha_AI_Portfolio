@@ -84,7 +84,22 @@
 /* Dark theme for top buttons container */
 [data-theme="dark"] .top-buttons-container {
   background: rgba(45, 45, 45, 0.95) !important;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 
+              0 4px 16px rgba(0, 0, 0, 0.3),
+              0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Dark theme for logout button */
+[data-theme="dark"] .logout-btn {
+  background: #dc3545 !important;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(220, 53, 69, 0.4) !important;
+}
+
+[data-theme="dark"] .logout-btn:hover {
+  background: #c82333 !important;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.5) !important;
 }
 
 /* Dark theme for project cards */
@@ -449,10 +464,13 @@ html, body {
     z-index: 1000; /* Higher z-index to ensure it stays on top */
     gap: 10px;
     background: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
-    backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+    backdrop-filter: blur(15px); /* Enhanced blur effect */
     border-radius: 15px;
-    padding: 10px 15px;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    padding: 12px 18px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15), 
+                0 4px 16px rgba(0, 0, 0, 0.1),
+                0 2px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
   .right-buttons-container {
@@ -1243,15 +1261,20 @@ html, body {
     background: #dc3545;
     color: white;
     border: none;
-    border-radius: 4px;
-    padding: 5px 10px;
+    border-radius: 6px;
+    padding: 8px 12px;
     font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    min-width: 60px;
   }
 
   .logout-btn:hover {
     background: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
   }
 
   .admin-stats-header h3 {
@@ -1347,4 +1370,4 @@ html, body {
   .error {
     color: #dc3545;
   }
-    
+  
