@@ -106,6 +106,12 @@
 }
 
 /* Dark theme for theme toggle */
+[data-theme="dark"] .theme-toggle {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
 [data-theme="dark"] .theme-toggle:hover {
   background: #f39c12 !important;
   border-color: #f39c12 !important;
@@ -1051,6 +1057,33 @@ html, body {
       background: #ffffff !important;
       color: #1a1a1a !important;
     }
+    
+    /* Fix theme toggle in responsive - override CSS variables */
+    /* Light theme responsive */
+    .theme-toggle {
+      background: #ffffff !important;
+      color: #18191a !important;
+      border-color: #18191a !important;
+    }
+    
+    .theme-toggle:hover {
+      background: #f39c12 !important;
+      border-color: #f39c12 !important;
+      color: #fff !important;
+    }
+    
+    /* Dark theme responsive */
+    [data-theme="dark"] .theme-toggle {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .theme-toggle:hover {
+      background: #f39c12 !important;
+      border-color: #f39c12 !important;
+      color: #fff !important;
+    }
     .chat-container {
       max-height: 85vh;
       margin-bottom: 80px;
@@ -1173,6 +1206,19 @@ html, body {
     .profile-intro {
       padding-left: 0;
     }
+    
+    /* Dark theme for small devices */
+    [data-theme="dark"] .theme-toggle {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .theme-toggle:hover {
+      background: #f39c12 !important;
+      border-color: #f39c12 !important;
+      color: #fff !important;
+    }
   
   }
   
@@ -1259,6 +1305,19 @@ html, body {
   
     .profile-intro {
       padding-left: 0;
+    }
+    
+    /* Dark theme for medium devices */
+    [data-theme="dark"] .theme-toggle {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .theme-toggle:hover {
+      background: #f39c12 !important;
+      border-color: #f39c12 !important;
+      color: #fff !important;
     }
     
   }
