@@ -223,6 +223,113 @@
       "Pneumonia Detection": "modal-pneumonia",
       "Linear Algebra Visual Toolkit": "modal-linear"
     };
+
+    // === LIKE BUTTON FUNCTIONALITY ===
+    function toggleLike() {
+      const likeBtn = document.getElementById('likeBtn');
+      const heartIcon = likeBtn.querySelector('i');
+      const likeCount = document.getElementById('likeCount');
+      
+      // Send like toggle to server
+      fetch('/like', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.liked) {
+          likeBtn.classList.add('liked');
+          heartIcon.classList.remove('far');
+          heartIcon.classList.add('fas');
+          
+          // Add animation
+          likeBtn.style.transform = 'scale(1.2)';
+          setTimeout(() => {
+            likeBtn.style.transform = 'scale(1)';
+          }, 200);
+        } else {
+          likeBtn.classList.remove('liked');
+          heartIcon.classList.remove('fas');
+          heartIcon.classList.add('far');
+        }
+        
+        // Update like count
+        likeCount.textContent = data.total_likes;
+        
+        console.log(`Liked: ${data.liked}, Total likes: ${data.total_likes}`);
+      })
+      .catch(error => {
+        console.error('Error toggling like:', error);
+      });
+    }
+
+    // Load like status on page load
+    function loadLikeStatus() {
+      fetch('/like-status')
+      .then(res => res.json())
+      .then(data => {
+        const likeBtn = document.getElementById('likeBtn');
+        const heartIcon = likeBtn.querySelector('i');
+        const likeCount = document.getElementById('likeCount');
+        
+        if (data.liked) {
+          likeBtn.classList.add('liked');
+          heartIcon.classList.remove('far');
+          heartIcon.classList.add('fas');
+        } else {
+          likeBtn.classList.remove('liked');
+          heartIcon.classList.remove('fas');
+          heartIcon.classList.add('far');
+        }
+        
+        // Update like count
+        likeCount.textContent = data.total_likes;
+      })
+      .catch(error => {
+        console.error('Error loading like status:', error);
+      });
+    }
+
+    // === THEME TOGGLE FUNCTIONALITY ===
+    function toggleTheme() {
+      const body = document.body;
+      const themeIcon = document.getElementById('themeIcon');
+      
+      if (body.getAttribute('data-theme') === 'dark') {
+        body.removeAttribute('data-theme');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+        localStorage.setItem('theme', 'light');
+      } else {
+        body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+
+    // === INITIALIZE THEME ON PAGE LOAD ===
+    function initializeTheme() {
+      const savedTheme = localStorage.getItem('theme');
+      const themeIcon = document.getElementById('themeIcon');
+      
+      if (savedTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'dark');
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+      } else {
+        document.body.removeAttribute('data-theme');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
+      }
+    }
+
+    // Initialize everything when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeTheme();
+      loadLikeStatus();
+      verifyAdminSession();
+    });
   
 
     // Typewriter intro
@@ -726,14 +833,61 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Admin authentication
   function checkAdminAccess() {
-    const password = prompt("Enter admin password to access update controls:");
-    if (password === "sarmi2024") { // Change this to your desired password
-      document.getElementById('refreshContainer').style.display = 'flex';
-      return true;
-    } else if (password !== null) {
-      alert("Access denied. This feature is only available to the portfolio owner.");
-    }
+    const username = prompt("Enter admin username:");
+    if (!username) return false;
+    
+    const password = prompt("Enter admin password:");
+    if (!password) return false;
+    
+    // Authenticate with server
+    fetch('/admin-auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username, password: password })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        // Store session token
+        localStorage.setItem('admin_session_token', data.session_token);
+        document.getElementById('refreshContainer').style.display = 'flex';
+        alert("Admin access granted!");
+      } else {
+        alert("Access denied. Invalid credentials.");
+      }
+    })
+    .catch(error => {
+      console.error('Admin auth error:', error);
+      alert("Authentication failed. Please try again.");
+    });
+    
     return false;
+  }
+
+  // Verify admin session
+  function verifyAdminSession() {
+    const sessionToken = localStorage.getItem('admin_session_token');
+    if (!sessionToken) return false;
+    
+    fetch('/admin-verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ session_token: sessionToken })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.valid) {
+        document.getElementById('refreshContainer').style.display = 'flex';
+      } else {
+        localStorage.removeItem('admin_session_token');
+        document.getElementById('refreshContainer').style.display = 'none';
+      }
+    })
+    .catch(error => {
+      console.error('Session verification error:', error);
+      localStorage.removeItem('admin_session_token');
+      document.getElementById('refreshContainer').style.display = 'none';
+    });
   }
 
   // Show admin stats
