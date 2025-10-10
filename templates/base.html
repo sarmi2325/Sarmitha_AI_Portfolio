@@ -389,9 +389,31 @@
   function hideIntro() {
   document.getElementById("intro").style.display = "none";
   document.getElementById("chatbox").style.display = "flex";
+  
+  // Hide Hire Me button
   const hireBtn = document.getElementById("hireMeBtn");
   if (hireBtn) hireBtn.style.display = "none";
- 
+  
+  // Hide Theme Toggle button
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) themeToggle.style.display = "none";
+  
+  // Keep Like button visible (no changes needed)
+}
+
+  function showIntro() {
+  document.getElementById("intro").style.display = "flex";
+  document.getElementById("chatbox").style.display = "none";
+  
+  // Show Hire Me button
+  const hireBtn = document.getElementById("hireMeBtn");
+  if (hireBtn) hireBtn.style.display = "block";
+  
+  // Show Theme Toggle button
+  const themeToggle = document.getElementById("themeToggle");
+  if (themeToggle) themeToggle.style.display = "block";
+  
+  // Keep Like button visible (no changes needed)
 }
 
     function appendChatBubble(sender, msg) {
