@@ -549,7 +549,6 @@ html, body {
   .top-button:hover {
     background: var(--hover-bg);
     color: var(--hover-text);
-    transform: translateY(-2px);
     box-shadow: 0 4px 12px var(--shadow-color);
   }
 
