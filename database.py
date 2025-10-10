@@ -59,18 +59,6 @@ class PortfolioDatabase:
             self.app = None
         self.init_database()
     
-    def _execute_sql(self, sql: str, params: tuple = (), fetch: bool = False):
-        """Execute SQL query using SQLAlchemy."""
-        if not self.app:
-            raise ValueError("Database not properly initialized with Flask app!")
-        
-        with self.app.app_context():
-            if fetch:
-                result = db.session.execute(text(sql), params)
-                return [dict(row._mapping) for row in result]
-            else:
-                db.session.execute(text(sql), params)
-                db.session.commit()
     
     def init_database(self):
         """Initialize database with required tables."""
@@ -86,153 +74,161 @@ class PortfolioDatabase:
     
     def _init_admin_credentials(self):
         """Initialize admin credentials."""
-        result = self._execute_sql("SELECT COUNT(*) FROM admin_credentials", fetch=True)
-        if result[0]['count'] == 0:
-            # Default admin credentials
-            username = "admin"
-            password = "sarmi2024"
-            password_hash = hashlib.sha256(password.encode()).hexdigest()
-            
-            self._execute_sql('''
-                INSERT INTO admin_credentials (username, password_hash, created_at)
-                VALUES (%s, %s, %s)
-            ''', (username, password_hash, datetime.now()))
+        with self.app.app_context():
+            # Check if admin credentials exist
+            existing_admin = AdminCredential.query.first()
+            if not existing_admin:
+                # Create default admin credentials
+                username = "admin"
+                password = "sarmi2024"
+                password_hash = hashlib.sha256(password.encode()).hexdigest()
+                
+                admin_cred = AdminCredential(
+                    username=username,
+                    password_hash=password_hash,
+                    created_at=datetime.utcnow()
+                )
+                db.session.add(admin_cred)
+                db.session.commit()
     
     def add_visitor(self, ip_address: str, user_agent: str, session_id: str):
         """Add visitor to database."""
-        self._execute_sql('''
-            INSERT INTO visitors (ip_address, user_agent, session_id, visit_time)
-            VALUES (%s, %s, %s, %s)
-        ''', (ip_address, user_agent, session_id, datetime.now()))
+        with self.app.app_context():
+            visitor = Visitor(
+                ip_address=ip_address,
+                user_agent=user_agent,
+                session_id=session_id,
+                visit_time=datetime.utcnow()
+            )
+            db.session.add(visitor)
+            db.session.commit()
     
     def get_visitor_count(self) -> int:
         """Get total visitor count."""
-        result = self._execute_sql("SELECT COUNT(*) as count FROM visitors", fetch=True)
-        return result[0]['count']
+        with self.app.app_context():
+            return Visitor.query.count()
     
     def add_qa_log(self, question: str, answer: str, session_id: str, context_coverage: float):
         """Add Q&A log to database."""
-        self._execute_sql('''
-            INSERT INTO qa_logs (question, answer, session_id, context_coverage, timestamp)
-            VALUES (%s, %s, %s, %s, %s)
-        ''', (question, answer, session_id, context_coverage, datetime.now()))
+        with self.app.app_context():
+            qa_log = QALog(
+                question=question,
+                answer=answer,
+                session_id=session_id,
+                context_coverage=context_coverage,
+                timestamp=datetime.utcnow()
+            )
+            db.session.add(qa_log)
+            db.session.commit()
     
     def get_qa_logs(self, limit: int = 50) -> List[Dict]:
         """Get recent Q&A logs."""
-        return self._execute_sql('''
-            SELECT question, answer, context_coverage, timestamp
-            FROM qa_logs
-            ORDER BY timestamp DESC
-            LIMIT %s
-        ''', (limit,), fetch=True)
+        with self.app.app_context():
+            logs = QALog.query.order_by(QALog.timestamp.desc()).limit(limit).all()
+            return [
+                {
+                    'question': log.question,
+                    'answer': log.answer,
+                    'context_coverage': log.context_coverage,
+                    'timestamp': log.timestamp.strftime('%Y-%m-%d %H:%M:%S')
+                }
+                for log in logs
+            ]
     
     def toggle_like(self, session_id: str) -> bool:
         """Toggle like status for session."""
-        # Check current status
-        result = self._execute_sql(
-            "SELECT liked FROM likes WHERE session_id = %s",
-            (session_id,),
-            fetch=True
-        )
-        
-        if result:
-            current_status = result[0]['liked']
-            new_status = not current_status
-            self._execute_sql(
-                "UPDATE likes SET liked = %s WHERE session_id = %s",
-                (new_status, session_id)
-            )
-        else:
-            new_status = True
-            self._execute_sql('''
-                INSERT INTO likes (session_id, liked, timestamp)
-                VALUES (%s, %s, %s)
-            ''', (session_id, new_status, datetime.now()))
-        
-        return new_status
+        with self.app.app_context():
+            existing_like = Like.query.filter_by(session_id=session_id).first()
+            
+            if existing_like:
+                # Toggle existing like
+                existing_like.liked = not existing_like.liked
+                new_status = existing_like.liked
+            else:
+                # Create new like
+                new_like = Like(
+                    session_id=session_id,
+                    liked=True,
+                    timestamp=datetime.utcnow()
+                )
+                db.session.add(new_like)
+                new_status = True
+            
+            db.session.commit()
+            return new_status
     
     def get_like_count(self) -> int:
         """Get total number of likes."""
-        result = self._execute_sql("SELECT COUNT(*) as count FROM likes WHERE liked = true", fetch=True)
-        return result[0]['count']
+        with self.app.app_context():
+            return Like.query.filter_by(liked=True).count()
     
     def get_session_like_status(self, session_id: str) -> bool:
         """Get like status for specific session."""
-        result = self._execute_sql(
-            "SELECT liked FROM likes WHERE session_id = %s",
-            (session_id,),
-            fetch=True
-        )
-        return result[0]['liked'] if result else False
+        with self.app.app_context():
+            like = Like.query.filter_by(session_id=session_id).first()
+            return like.liked if like else False
     
     def cleanup_expired_sessions(self):
         """Clean up expired admin sessions."""
-        self._execute_sql('''
-            DELETE FROM admin_sessions 
-            WHERE expires_at < %s
-        ''', (datetime.now().timestamp(),))
+        with self.app.app_context():
+            current_time = datetime.now().timestamp()
+            AdminSession.query.filter(AdminSession.expires_at < current_time).delete()
+            db.session.commit()
     
     def get_analytics(self) -> Dict:
         """Get comprehensive analytics data."""
-        # Visitor stats
-        total_visitors = self.get_visitor_count()
-        
-        # Unique visitors (by session_id)
-        result = self._execute_sql(
-            "SELECT COUNT(DISTINCT session_id) as count FROM visitors WHERE session_id IS NOT NULL",
-            fetch=True
-        )
-        unique_visitors = result[0]['count']
-        
-        # Q&A stats
-        result = self._execute_sql("SELECT COUNT(*) as count FROM qa_logs", fetch=True)
-        total_qa = result[0]['count']
-        
-        # Like stats
-        total_likes = self.get_like_count()
-        
-        # Recent activity
-        result = self._execute_sql('''
-            SELECT COUNT(*) as count FROM visitors 
-            WHERE visit_time > CURRENT_TIMESTAMP - INTERVAL '24 hours'
-        ''', fetch=True)
-        visitors_24h = result[0]['count']
-        
-        return {
-            "total_visitors": total_visitors,
-            "unique_visitors": unique_visitors,
-            "total_qa": total_qa,
-            "total_likes": total_likes,
-            "visitors_24h": visitors_24h
-        }
+        with self.app.app_context():
+            # Visitor stats
+            total_visitors = Visitor.query.count()
+            
+            # Unique visitors (by session_id)
+            unique_visitors = db.session.query(Visitor.session_id).filter(Visitor.session_id.isnot(None)).distinct().count()
+            
+            # Q&A stats
+            total_qa = QALog.query.count()
+            
+            # Like stats
+            total_likes = Like.query.filter_by(liked=True).count()
+            
+            # Recent activity (24h)
+            from datetime import timedelta
+            yesterday = datetime.utcnow() - timedelta(hours=24)
+            visitors_24h = Visitor.query.filter(Visitor.visit_time > yesterday).count()
+            
+            return {
+                "total_visitors": total_visitors,
+                "unique_visitors": unique_visitors,
+                "total_qa": total_qa,
+                "total_likes": total_likes,
+                "visitors_24h": visitors_24h
+            }
     
     def verify_admin_password(self, username: str, password: str) -> bool:
         """Verify admin credentials."""
-        password_hash = hashlib.sha256(password.encode()).hexdigest()
-        result = self._execute_sql('''
-            SELECT id FROM admin_credentials 
-            WHERE username = %s AND password_hash = %s
-        ''', (username, password_hash), fetch=True)
-        
-        return len(result) > 0
+        with self.app.app_context():
+            password_hash = hashlib.sha256(password.encode()).hexdigest()
+            admin = AdminCredential.query.filter_by(username=username, password_hash=password_hash).first()
+            return admin is not None
     
     def create_admin_session(self, username: str) -> str:
         """Create admin session token."""
-        session_token = secrets.token_urlsafe(32)
-        expires_at = datetime.now().timestamp() + (24 * 60 * 60)  # 24 hours
-        
-        self._execute_sql('''
-            INSERT INTO admin_sessions (username, session_token, expires_at)
-            VALUES (%s, %s, %s)
-        ''', (username, session_token, expires_at))
-        
-        return session_token
+        with self.app.app_context():
+            session_token = secrets.token_urlsafe(32)
+            expires_at = datetime.now().timestamp() + (24 * 60 * 60)  # 24 hours
+            
+            admin_session = AdminSession(
+                username=username,
+                session_token=session_token,
+                expires_at=expires_at
+            )
+            db.session.add(admin_session)
+            db.session.commit()
+            
+            return session_token
     
     def verify_admin_session(self, session_token: str) -> bool:
         """Verify admin session token."""
-        result = self._execute_sql('''
-            SELECT id FROM admin_sessions 
-            WHERE session_token = %s AND expires_at > %s
-        ''', (session_token, datetime.now().timestamp()), fetch=True)
-        
-        return len(result) > 0
+        with self.app.app_context():
+            current_time = datetime.now().timestamp()
+            session = AdminSession.query.filter_by(session_token=session_token).filter(AdminSession.expires_at > current_time).first()
+            return session is not None
