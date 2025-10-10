@@ -132,8 +132,7 @@ def get_admin_data():
         qa_logs = db.get_qa_logs(limit=50)
         
         return jsonify({
-            "visitor_count": analytics["total_visitors"],
-            "unique_visitors": analytics["unique_visitors"],
+            "visitor_count": analytics["unique_visitors"],
             "total_qa": analytics["total_qa"],
             "total_likes": analytics["total_likes"],
             "visitors_24h": analytics["visitors_24h"],
