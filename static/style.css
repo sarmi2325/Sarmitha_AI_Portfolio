@@ -162,7 +162,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 80px; /* Increased to account for fixed top buttons */
+    margin-top: 60px; /* Moved image up by reducing margin */
     padding-top: 20px; /* Extra padding for safety */
   }
   .typewriter-container {
@@ -468,7 +468,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: 16px;
+    margin-top: 24px; /* Moved like button down */
   }
 
   .like-count {
@@ -788,12 +788,12 @@ html, body {
       width:100%
     }
     #intro {
-      margin-top: 110px; /* Extra space for very small devices */
+      margin-top: 80px; /* Moved typing and photo up for very small devices */
       padding-top: 10px;
     }
 
     .typewriter-container {
-      margin-top: 90px;
+      margin-top: 60px; /* Moved typing up */
     }
   
     .modal-content {
@@ -892,7 +892,7 @@ html, body {
     }
 
     #intro {
-      margin-top: 100px; /* More space for smaller screens */
+      margin-top: 70px; /* Moved typing and photo up for extra small devices */
       padding-top: 10px;
     }
 
@@ -933,7 +933,7 @@ html, body {
     
     .like-container {
       gap: 1px;
-      margin-top: 6px;
+      margin-top: 20px; /* Moved like button down in responsive */
     }
     
     .like-count {
@@ -1026,7 +1026,7 @@ html, body {
     }
 
     #intro {
-      margin-top: 90px; /* Proper spacing for small devices */
+      margin-top: 65px; /* Moved typing and photo up for small devices */
       padding-top: 15px;
     }
 
@@ -1082,12 +1082,12 @@ html, body {
     }
 
     #intro {
-      margin-top: 85px; /* Proper spacing for medium devices */
+      margin-top: 65px; /* Moved typing and photo up for medium devices */
       padding-top: 15px;
     }
 
     .typewriter-container {
-      margin-top: 80px; 
+      margin-top: 60px; /* Moved typing up */
     }
 
     .typewriter-text {
