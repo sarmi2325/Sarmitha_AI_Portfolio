@@ -1,3 +1,4 @@
+/* === CSS VARIABLES FOR THEMES === */
 :root {
   --bg-primary: #fff;
   --bg-secondary: #f2f3f5;
@@ -80,6 +81,12 @@
   border-color: #ffffff !important;
 }
 
+/* Dark theme for top buttons container */
+[data-theme="dark"] .top-buttons-container {
+  background: rgba(45, 45, 45, 0.95) !important;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
 /* Dark theme for project cards */
 [data-theme="dark"] .project-card-bw {
   background: #2d2d2d !important;
@@ -149,7 +156,8 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 80px; /* Increased to account for fixed top buttons */
+    padding-top: 20px; /* Extra padding for safety */
   }
   .typewriter-container {
     margin-top: 30px;
@@ -438,8 +446,13 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 100;
+    z-index: 1000; /* Higher z-index to ensure it stays on top */
     gap: 10px;
+    background: rgba(255, 255, 255, 0.95); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect for modern browsers */
+    border-radius: 15px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   }
 
   .right-buttons-container {
@@ -453,7 +466,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: 18px;
+    margin-top: 16px;
   }
 
   .like-count {
@@ -772,6 +785,11 @@ html, body {
     .main-area{
       width:100%
     }
+    #intro {
+      margin-top: 110px; /* Extra space for very small devices */
+      padding-top: 10px;
+    }
+
     .typewriter-container {
       margin-top: 90px;
     }
@@ -870,7 +888,12 @@ html, body {
       width: 100%;
       align-items: center;
     }
-  
+
+    #intro {
+      margin-top: 100px; /* More space for smaller screens */
+      padding-top: 10px;
+    }
+
     .typewriter-text {
       font-size: 20px;
       margin-bottom: 10px;
@@ -999,6 +1022,12 @@ html, body {
       flex-direction: column;
       align-items: center;
     }
+
+    #intro {
+      margin-top: 90px; /* Proper spacing for small devices */
+      padding-top: 15px;
+    }
+
     .profile-photo img {
       width: 250px;
       height: 310px;
@@ -1007,7 +1036,7 @@ html, body {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       background: #f2f3f5;
     }
-  
+
     .typewriter-text {
       font-size: 24px;
     }
@@ -1049,10 +1078,16 @@ html, body {
       flex-direction: row;
       justify-content: center;
     }
+
+    #intro {
+      margin-top: 85px; /* Proper spacing for medium devices */
+      padding-top: 15px;
+    }
+
     .typewriter-container {
       margin-top: 80px; 
     }
-  
+
     .typewriter-text {
       font-size: 30px;
     }
@@ -1198,6 +1233,27 @@ html, body {
     padding-bottom: 10px;
   }
 
+  .admin-header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .logout-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .logout-btn:hover {
+    background: #c82333;
+  }
+
   .admin-stats-header h3 {
     margin: 0;
     color: #333;
@@ -1291,4 +1347,4 @@ html, body {
   .error {
     color: #dc3545;
   }
-  
+    
