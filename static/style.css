@@ -518,7 +518,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: 24px; /* Moved like button down */
+    margin-top: 18px; /* Moved like button down */
   }
 
   .like-count {
@@ -832,7 +832,7 @@ html, body {
     transform: scale(1.1);
   }
   
-  /* Responsive Fixes */
+/* Responsive Fixes */
   @media (max-width: 480px) {
     .main-area{
       width:100%
@@ -891,11 +891,7 @@ html, body {
       font-size: 15px;
     }
     
-    .modal-btn:hover {
-      background-color: #fff;
-      color: #18191a;
-      border: 1.5px solid #18191a;
-    }
+    /* Hover effects removed for responsive to prevent sticking */
   
     .chat-container {
       padding-bottom: 220px;
@@ -1004,24 +1000,7 @@ html, body {
       min-width: 40px;
     }
     
-    /* Ensure theme toggle works properly in responsive */
-    .theme-toggle:hover {
-      background: #f39c12 !important;
-      border-color: #f39c12 !important;
-      color: #fff !important;
-    }
-    
-    /* Dark theme hover for theme toggle in responsive */
-    [data-theme="dark"] .theme-toggle:hover {
-      background: #f39c12 !important;
-      border-color: #f39c12 !important;
-      color: #fff !important;
-    }
-    
-    .top-button:hover {
-      background: var(--hover-bg) !important;
-      color: var(--hover-text) !important;
-    }
+    /* Hover effects removed for responsive to prevent sticking */
     
     /* Specific fixes for hire button */
     #hireMeBtn {
@@ -1030,10 +1009,7 @@ html, body {
       border-color: var(--border-color) !important;
     }
     
-    #hireMeBtn:hover {
-      background: var(--hover-bg) !important;
-      color: var(--hover-text) !important;
-    }
+    /* Hover effects removed for responsive to prevent sticking */
     
     /* Dark theme responsive button fixes - explicit colors */
     [data-theme="dark"] .top-button {
@@ -1042,10 +1018,7 @@ html, body {
       border-color: #ffffff !important;
     }
     
-    [data-theme="dark"] .top-button:hover {
-      background: #ffffff !important;
-      color: #1a1a1a !important;
-    }
+    /* Hover effects removed for responsive to prevent sticking */
     
     [data-theme="dark"] #hireMeBtn {
       background: #1a1a1a !important;
@@ -1053,10 +1026,7 @@ html, body {
       border-color: #ffffff !important;
     }
     
-    [data-theme="dark"] #hireMeBtn:hover {
-      background: #ffffff !important;
-      color: #1a1a1a !important;
-    }
+    /* Hover effects removed for responsive to prevent sticking */
     
     /* Fix theme toggle in responsive - override CSS variables */
     /* Light theme responsive */
@@ -1067,11 +1037,7 @@ html, body {
       transition: all 0.2s ease !important;
     }
     
-    .theme-toggle:hover {
-      background: #f39c12 !important;
-      border-color: #f39c12 !important;
-      color: #fff !important;
-    }
+    /* Hover effects removed for responsive to prevent sticking */
     
     /* Dark theme responsive */
     [data-theme="dark"] .theme-toggle {
@@ -1081,11 +1047,7 @@ html, body {
       transition: all 0.2s ease !important;
     }
     
-    [data-theme="dark"] .theme-toggle:hover {
-      background: #f39c12 !important;
-      border-color: #f39c12 !important;
-      color: #fff !important;
-    }
+    /* Hover effects removed for responsive to prevent sticking */
     .chat-container {
       max-height: 85vh;
       margin-bottom: 80px;
@@ -1129,10 +1091,69 @@ html, body {
       font-size: 15px;
     }
     
-    .modal-btn:hover {
-      background-color: #fff;
-      color: #18191a;
-      border: 1.5px solid #18191a;
+    /* Hover effects removed for responsive to prevent sticking */
+    .profile-header {
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+  
+    
+  
+    .profile-intro {
+      padding-left: 0;
+    }
+    .profile-photo img {
+      width: 250px;
+      height: 310px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      background: #f2f3f5;
+    }
+  }
+  
+  /* Small Devices (576px–767.98px) */
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .main-area {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #intro {
+      margin-top: 65px; /* Moved typing and photo up for small devices */
+      padding-top: 15px;
+    }
+
+    .profile-photo img {
+      width: 250px;
+      height: 310px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      background: #f2f3f5;
+    }
+
+    .typewriter-text {
+      font-size: 24px;
+    }
+  
+    #sarmi-lottie {
+      width: 260px;
+      height: 260px;
+    }
+    .chat-container {
+      max-width: 500px;
+      height: 550px;
+    }
+    .modal-links {
+      flex-direction: row;
+      align-items: stretch;
+    }
+  
+    .modal-btn {
+      width: 100%;
+      font-size: 1rem;
     }
     .profile-header {
       flex-direction: column;
@@ -1141,6 +1162,294 @@ html, body {
     }
   
     
+  
+    .profile-intro {
+      padding-left: 0;
+    }
+    
+    /* Hover effects removed for responsive to prevent sticking */
+  
+  }
+  
+  /* Medium Devices (768px–991.98px) */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .main-area {
+      flex-direction: row;
+      justify-content: center;
+    }
+
+    #intro {
+      margin-top: 65px; /* Moved typing and photo up for medium devices */
+      padding-top: 15px;
+    }
+
+    .typewriter-container {
+      margin-top: 60px; /* Moved typing up */
+    }
+
+    .typewriter-text {
+      font-size: 30px;
+    }
+  
+    #sarmi-lottie {
+      width: 300px;
+      height: 300px;
+      margin-top: 20px; 
+    }
+    .chat-container {
+      max-width: 700px;
+      height: 500px;
+    }
+    .modal-content {
+      width: 95%;
+      padding: 18px 16px;
+      font-size: 0.95rem;
+    }
+  
+    .modal-content h2,
+    .modal-content h3 {
+      font-size: 0.7rem;
+    }
+  
+    .modal-content ul li {
+      font-size: 0.95rem;
+      margin-bottom: 6px;
+    }
+  
+    .modal-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 15px;
+      justify-content: flex-start;
+    }
+    
+    .modal-btn {
+      background-color: #18191a;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.25s ease;
+      border: none;
+      font-size: 15px;
+    }
+    
+    /* Hover effects removed for responsive to prevent sticking */
+    .profile-header {
+      flex-direction: column;
+      text-align: center;
+      padding: 20px;
+    }
+  
+    .profile-photo {
+      margin-bottom: 20px;
+    }
+  
+    .profile-intro {
+      padding-left: 0;
+    }
+    
+    /* Hover effects removed for responsive to prevent sticking */
+    
+  }
+  
+  
+  #sarmi-image {
+    animation: float 3s ease-in-out infinite;
+    margin-top: 40px; 
+  }
+  
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  #sarmi-image:hover {
+    filter: drop-shadow(0 0 20px rgba(0, 102, 255, 0.3));
+    transition: 0.3s;
+  }
+
+  /* === ADMIN STATS STYLES === */
+  .stats-btn {
+    background: #4CAF50;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+  }
+
+  .stats-btn:hover {
+    background: #45a049;
+    transform: scale(1.1);
+  }
+
+  .stats-label {
+    font-size: 10px;
+    color: #666;
+    text-align: center;
+    margin-top: 2px;
+    margin-left: 10px;
+  }
+
+  .admin-stats-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .admin-stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+  }
+
+  .admin-header-buttons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .logout-btn {
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(220, 53, 69, 0.3);
+    min-width: 60px;
+  }
+
+  .logout-btn:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+  }
+
+  .admin-stats-header h3 {
+    margin: 0;
+    color: #333;
+    font-size: 18px;
+  }
+
+  .close-stats-btn {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .close-stats-btn:hover {
+    color: #333;
+  }
+
+  .admin-stats-content {
+    font-size: 14px;
+  }
+
+  .visitor-count {
+    margin-bottom: 20px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    border-left: 4px solid #007bff;
+  }
+
+  .qa-logs {
+    margin-top: 20px;
+  }
+
+  .qa-logs-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 10px;
+  }
+
+  .qa-log-item {
+    margin-bottom: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .qa-log-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .qa-timestamp {
+    font-size: 11px;
+    color: #666;
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+
+  .qa-question {
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .qa-answer {
+    color: #555;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  .no-logs, .error {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-style: italic;
+  }
+
+  .error {
+    color: #dc3545;
+  }
+  
   
     .profile-intro {
       padding-left: 0;
