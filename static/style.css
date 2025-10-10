@@ -512,7 +512,7 @@ html, body {
     flex-direction: column;
     align-items: center;
     gap: 2px;
-    margin-top: 17px; /* Moved like button down */
+    margin-top: 24px; /* Moved like button down */
   }
 
   .like-count {
@@ -984,9 +984,13 @@ html, body {
       font-size: 8px;
     }
     
+    /* Responsive button styles - merged to avoid conflicts */
     .top-button {
       padding: 8px 12px;
       font-size: 12px;
+      background: var(--bg-primary) !important;
+      color: var(--text-primary) !important;
+      border-color: var(--border-color) !important;
     }
     
     .like-button, .theme-toggle {
@@ -999,13 +1003,6 @@ html, body {
       background: #f39c12 !important;
       border-color: #f39c12 !important;
       color: #fff !important;
-    }
-    
-    /* Fix button color issues in responsive - prevent black/white override */
-    .top-button {
-      background: var(--bg-primary) !important;
-      color: var(--text-primary) !important;
-      border-color: var(--border-color) !important;
     }
     
     .top-button:hover {
@@ -1023,6 +1020,29 @@ html, body {
     #hireMeBtn:hover {
       background: var(--hover-bg) !important;
       color: var(--hover-text) !important;
+    }
+    
+    /* Dark theme responsive button fixes - explicit colors */
+    [data-theme="dark"] .top-button {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] .top-button:hover {
+      background: #ffffff !important;
+      color: #1a1a1a !important;
+    }
+    
+    [data-theme="dark"] #hireMeBtn {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border-color: #ffffff !important;
+    }
+    
+    [data-theme="dark"] #hireMeBtn:hover {
+      background: #ffffff !important;
+      color: #1a1a1a !important;
     }
     .chat-container {
       max-height: 85vh;
