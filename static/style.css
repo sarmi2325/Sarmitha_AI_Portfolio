@@ -118,6 +118,12 @@
   color: #fff !important;
 }
 
+[data-theme="dark"] .theme-toggle:not(:hover) {
+  background: #1a1a1a !important;
+  color: #ffffff !important;
+  border-color: #ffffff !important;
+}
+
 /* Dark theme responsive button fixes */
 [data-theme="dark"] .top-button {
   background: var(--bg-primary) !important;
@@ -582,6 +588,12 @@ html, body {
     background: #f39c12 !important;
     border-color: #f39c12 !important;
     color: #fff !important;
+  }
+  
+  .theme-toggle:not(:hover) {
+    background: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
   }
   
   .profile-header {
@@ -1064,6 +1076,7 @@ html, body {
       background: #ffffff !important;
       color: #18191a !important;
       border-color: #18191a !important;
+      transition: all 0.2s ease !important;
     }
     
     .theme-toggle:hover {
@@ -1072,17 +1085,30 @@ html, body {
       color: #fff !important;
     }
     
+    .theme-toggle:not(:hover) {
+      background: #ffffff !important;
+      color: #18191a !important;
+      border-color: #18191a !important;
+    }
+    
     /* Dark theme responsive */
     [data-theme="dark"] .theme-toggle {
       background: #1a1a1a !important;
       color: #ffffff !important;
       border-color: #ffffff !important;
+      transition: all 0.2s ease !important;
     }
     
     [data-theme="dark"] .theme-toggle:hover {
       background: #f39c12 !important;
       border-color: #f39c12 !important;
       color: #fff !important;
+    }
+    
+    [data-theme="dark"] .theme-toggle:not(:hover) {
+      background: #1a1a1a !important;
+      color: #ffffff !important;
+      border-color: #ffffff !important;
     }
     .chat-container {
       max-height: 85vh;
