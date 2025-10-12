@@ -79,8 +79,9 @@ class PortfolioDatabase:
             existing_admin = AdminCredential.query.first()
             if not existing_admin:
                 # Create default admin credentials
-                username = "admin"
-                password = "sarmi2024"
+                username = os.getenv('ADMIN_USERNAME')
+                password = os.getenv('ADMIN_PASSWORD')
+    
                 password_hash = hashlib.sha256(password.encode()).hexdigest()
                 
                 admin_cred = AdminCredential(
